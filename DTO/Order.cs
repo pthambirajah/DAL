@@ -9,7 +9,7 @@ namespace DTO
         public int idOrder { get; set; }
         public string status { get; set; }
         public string createdAt { get; set; }
-        public string idCustomer { get; set; }
+        public int idCustomer { get; set; }
         public int idDelivery { get; set; }
     }
 }

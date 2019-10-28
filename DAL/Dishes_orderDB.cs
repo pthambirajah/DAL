@@ -7,25 +7,25 @@ using DTO;
 
 namespace DAL
 {
-    public class OrderDB : IOrderDB
+    public class Dishes_orderDB : IDishes_orderDB
     {
         public IConfiguration Configuration { get; }
-        public OrderDB(IConfiguration configuration)
+        public Dishes_orderDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
 
-        public Order GetOrder(int id)
+        public Dishes_order GetDishes_order(int id)
         {
-            Order order = null;
+            Dishes_order dishes_order = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM order WHERE idOrder = @id";
+                    string query = "SELECT * FROM dishes_order WHERE idDishes = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -35,15 +35,11 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            order = new Order();
+                            dishes_order = new Dishes_order();
 
-                            order.idOrder = (int)dr["idOrder"];
-                            order.status = (string)dr["status"];
-                            order.createdAt = (string)dr["createdAt"];
-                            order.idCustomer = (int)dr["idCustomer"];
-                            order.idDelivery = (int)dr["idDelivery"];
-
-
+                            dishes_order.idDishes_Order = (int)dr["idDishes_Order"];
+                            dishes_order.idDishes = (int)dr["idDishes"];
+                            dishes_order.idOrder = (int)dr["idOrder"];
                         }
                     }
                 }
@@ -53,10 +49,10 @@ namespace DAL
                 throw e;
             }
 
-            return order;
+            return dishes_order;
         }
 
-        public Order AddOrder(Order order)
+        public Dishes_order AddDishes_order(Dishes_order dishes_order)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -64,16 +60,15 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO order(status, createdAt, idCustomer, idDelivery) VALUES(@status, @createdAt, @idCustomer, @idDelivery); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO dishes_order(idDishes, idDishes_Order, idOrder) VALUES(@idDishes, @idDishes_Order, @idOrder); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@createdAt", order.createdAt);
-                    cmd.Parameters.AddWithValue("@idCustomer", order.idCustomer);
-                    cmd.Parameters.AddWithValue("@idDelivery", order.idDelivery);
+                    cmd.Parameters.AddWithValue("@idDishes", dishes_order.idDishes);
+                    cmd.Parameters.AddWithValue("@idDishes_Order", dishes_order.idDishes_Order);
+                    cmd.Parameters.AddWithValue("@idOrder", dishes_order.idOrder);
 
                     cn.Open();
 
-                    order.idOrder = Convert.ToInt32(cmd.ExecuteScalar());
+                    dishes_order.idDishes_Order = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -81,10 +76,10 @@ namespace DAL
                 throw e;
             }
 
-            return order;
+            return dishes_order;
         }
 
-        public int UpdateOrder(Order order)
+        public int UpdateDishes_order(Dishes_order dishes_order)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -93,12 +88,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE restaurant SET status=@status, createdAt=@createdAt, idCustomer=@idCustomer, idDelivery=@idDelivery WHERE idOrder=@id";
+                    string query = "UPDATE dishes_order SET name=@name, idDishes=@idDishes, idDishes_Order=@idDishes_Order, idOrder=@idOrder WHERE idDishes_Order=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@createdAt", order.createdAt);
-                    cmd.Parameters.AddWithValue("@idCustomer", order.idCustomer);
-                    cmd.Parameters.AddWithValue("@idDelivery", order.idDelivery);
+                    cmd.Parameters.AddWithValue("@idDishes", dishes_order.idDishes);
+                    cmd.Parameters.AddWithValue("@idDishes_Order", dishes_order.idDishes_Order);
+                    cmd.Parameters.AddWithValue("@idOrder", dishes_order.idOrder);
 
                     cn.Open();
 
@@ -113,7 +107,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteOrder(int id)
+        public int DeleteDishes_order(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -122,7 +116,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM order WHERE idOrder=@id";
+                    string query = "DELETE FROM dishes_order WHERE idDishes_order=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
