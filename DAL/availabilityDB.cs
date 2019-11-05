@@ -7,25 +7,25 @@ using DTO;
 
 namespace DAL
 {
-    public class CredentialsDB : ICredentialsDB
+    public class AvailabilityDB : IAvailabilityDB
     {
         public IConfiguration Configuration { get; }
-        public CredentialsDB(IConfiguration configuration)
+        public AvailabilityDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
 
-        public Credentials GetCredentials(int id)
+        public Availability GetAvailability(int id)
         {
-            Credentials credentials = null;
+            Availability availability = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM credentials WHERE idCredentials = @id";
+                    string query = "SELECT * FROM availability WHERE idAvailability = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -35,12 +35,13 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            credentials = new Credentials();
+                            availability = new Availability();
 
-                            credentials.idCredentials = (int)dr["idCredentials"];
-                            credentials.username = (string)dr["username"];
-                            credentials.password = (string)dr["password"];
-
+                            availability.idAvailability = (int)dr["idAvailability"];
+                            availability.isAvailable = (Boolean)dr["isAvailable"];
+                            availability.time = (DateTime)dr["time"];
+                            availability.idStaff = (int)dr["idStaff"];
+                            
                         }
                     }
                 }
@@ -50,10 +51,10 @@ namespace DAL
                 throw e;
             }
 
-            return credentials;
+            return availability;
         }
 
-        public Credentials AddCredentials(Credentials credentials)
+        public Availability AddAvailability(Availability availability)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -61,16 +62,17 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO credentials(idCredentials, username, password) VALUES(@idCredentials, @username, @password); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO availability(idAvailability, isAvailable, time, idStaff) VALUES(@idAvailability, @isAvailable, @time, @idStaff); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCredentials", credentials.idCredentials);
-                    cmd.Parameters.AddWithValue("@username", credentials.username);
-                    cmd.Parameters.AddWithValue("@password", credentials.password);
+                    cmd.Parameters.AddWithValue("@idAvailability", availability.idAvailability);
+                    cmd.Parameters.AddWithValue("@isAvailable", availability.isAvailable);
+                    cmd.Parameters.AddWithValue("@time", availability.time);
+                    cmd.Parameters.AddWithValue("@idStaff", availability.idStaff);
 
 
                     cn.Open();
 
-                    credentials.idCredentials = Convert.ToInt32(cmd.ExecuteScalar());
+                    availability.idAvailability = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -78,10 +80,10 @@ namespace DAL
                 throw e;
             }
 
-            return credentials;
+            return availability;
         }
 
-        public int UpdateCredentials(Credentials credentials)
+        public int UpdateAvailability(Availability availability)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -90,11 +92,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE credentials SET idCredentials=@idCredentials, username=@username, password=@password WHERE idCredentials=@idCredentials";
+                    string query = "UPDATE availability SET idAvailability=@idAvailability, isAvailable=@isAvailable, time=@time, idStaff=@idStaff WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCredentials", credentials.idCredentials);
-                    cmd.Parameters.AddWithValue("@username", credentials.username);
-                    cmd.Parameters.AddWithValue("@password", credentials.password);
+                    cmd.Parameters.AddWithValue("@idAvailability", availability.idAvailability);
+                    cmd.Parameters.AddWithValue("@isAvailable", availability.isAvailable);
+                    cmd.Parameters.AddWithValue("@time", availability.time);
+                    cmd.Parameters.AddWithValue("@idStaff", availability.idStaff);
 
                     cn.Open();
 
@@ -109,7 +112,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteCredentials(int id)
+        public int DeleteAvailability(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -118,9 +121,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM credentials WHERE idCredentials=@idCredentials";
+                    string query = "DELETE FROM availability WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCredentials", id);
+                    cmd.Parameters.AddWithValue("@idAvailability", id);
 
                     cn.Open();
 

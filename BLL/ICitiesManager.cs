@@ -8,5 +8,11 @@ namespace BLL
 {
     interface ICitiesManager
     {
+        ICitiesDB CitiesDB { get; }
+
+        Cities AddCities(Cities cities);
+        Cities UpdateCities(Cities cities);
+
+        Cities DeleteCities(int id);
     }
 }

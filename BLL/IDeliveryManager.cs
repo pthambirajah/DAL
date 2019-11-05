@@ -8,5 +8,13 @@ namespace BLL
 {
     interface IDeliveryManager
     {
+
+        IDeliveryDB DeliveryDB { get; }
+
+        Delivery AddDelivery(Delivery delivery);
+
+        Delivery UpdateDelivery(Delivery delivery);
+
+        Delivery DeleteDelivery(int id);
     }
 }

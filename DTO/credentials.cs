@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DTO
 {
-    class Credentials
+    public class Credentials
     {
         public int idCredentials { get; set; }
         public string username { get; set; }

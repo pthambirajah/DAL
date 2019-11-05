@@ -8,5 +8,12 @@ namespace BLL
 {
     interface IAvailibilityManager
     {
+        IAvailabilityDB AvailabilityDB { get; }
+
+        Availability AddAvailibility(Availability availibility);
+
+        Availability UpdateAvailability(Availability availibility);
+
+        Availability DeleteAvailability(int id);
     }
 }

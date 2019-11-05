@@ -8,5 +8,34 @@ namespace BLL
 {
     public class CustomerManager
     {
+        public CustomerDB CustomerDb { get; }
+
+
+        public CustomerManager(IConfiguration configuration)
+        {
+            CustomerDb = new CustomerDB(configuration);
+        }
+
+
+        public Customer GetCustomer(int id)
+        {
+            return CustomerDb.GetCustomer(id);
+        }
+
+        public Customer AddCustomer(Customer customer)
+        {
+            return CustomerDb.AddCustomer(customer);
+        }
+
+        public int UpdateCustomer(Customer customer)
+        {
+            return CustomerDb.UpdateCustomer(customer);
+
+        }
+
+        public int DeleteCustomer(int id)
+        {
+            return CustomerDb.DeleteCustomer(id);
+        }
     }
 }

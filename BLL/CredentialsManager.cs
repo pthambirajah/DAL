@@ -8,5 +8,34 @@ namespace BLL
 {
     public class CredentialsManager
     {
+        public CredentialsDB CredentialsDb { get; }
+
+
+        public CredentialsManager(IConfiguration configuration)
+        {
+            CredentialsDb = new CredentialsDB(configuration);
+        }
+
+
+        public Credentials GetCredentials(int id)
+        {
+            return CredentialsDb.GetCredentials(id);
+        }
+
+        public Credentials AddCredentials(Credentials credentials)
+        {
+            return CredentialsDb.AddCredentials(credentials);
+        }
+
+        public int UpdateCredentials(Credentials credentials)
+        {
+            return CredentialsDb.UpdateCredentials(credentials);
+
+        }
+
+        public int DeleteCredentials(int id)
+        {
+            return CredentialsDb.DeleteCredentials(id);
+        }
     }
 }
