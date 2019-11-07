@@ -10,7 +10,7 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        Staff AddRestaurant(Restaurant restaurant);
+        Restaurant AddRestaurant(Restaurant restaurant);
         int DeleteRestaurant(int id);
         Restaurant GetRestaurant(int id);
         int UpdateRestaurant(Restaurant restaurant);

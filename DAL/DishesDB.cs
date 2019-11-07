@@ -16,7 +16,7 @@ namespace DAL
         }
 
 
-        public Order GetDishes(int id)
+        public Dishes GetDishes(int id)
         {
             Dishes dishes = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

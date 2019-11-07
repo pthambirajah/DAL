@@ -21,6 +21,7 @@ namespace ConsoleApp
             //Get all hotels
             Console.WriteLine("--GET ALL HOTELS--");
             var staff = staffDbManager.GetStaff(1);
+            Console.WriteLine("Check db");
             Console.WriteLine(staff.name);
 
         }
