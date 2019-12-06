@@ -1,0 +1,683 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GharbiThambirajahProject2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="availibility">
+          <Key>
+            <PropertyRef Name="idAvailability" />
+          </Key>
+          <Property Name="idAvailability" Type="int" Nullable="false" />
+          <Property Name="isAvailable" Type="tinyint" Nullable="false" />
+          <Property Name="time" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idStaff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cities">
+          <Key>
+            <PropertyRef Name="idCity" />
+          </Key>
+          <Property Name="idCity" Type="int" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="post_code" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credentials">
+          <Key>
+            <PropertyRef Name="idCredentials" />
+          </Key>
+          <Property Name="idCredentials" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="130" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idCustomer" />
+          </Key>
+          <Property Name="idCustomer" Type="int" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="idCity" Type="int" Nullable="false" />
+          <Property Name="idCredentials" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="delivery">
+          <Key>
+            <PropertyRef Name="idDelivery" />
+          </Key>
+          <Property Name="idDelivery" Type="int" Nullable="false" />
+          <Property Name="deliveryTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idStaff" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dishes">
+          <Key>
+            <PropertyRef Name="idDishes" />
+          </Key>
+          <Property Name="idDishes" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idRestaurant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dishes_order">
+          <Key>
+            <PropertyRef Name="idDishes_Order" />
+          </Key>
+          <Property Name="idDishes" Type="int" Nullable="false" />
+          <Property Name="idDishes_Order" Type="int" Nullable="false" />
+          <Property Name="idOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createdAt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idCustomer" Type="int" Nullable="false" />
+          <Property Name="idDelivery" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="restaurants">
+          <Key>
+            <PropertyRef Name="idRestaurant" />
+          </Key>
+          <Property Name="idRestaurant" Type="int" Nullable="false" />
+          <Property Name="merchant_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createdAt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idCity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="idStaff" />
+          </Key>
+          <Property Name="idStaff" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_56">
+          <End Role="dishes" Type="Self.dishes" Multiplicity="1" />
+          <End Role="dishes_order" Type="Self.dishes_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dishes">
+              <PropertyRef Name="idDishes" />
+            </Principal>
+            <Dependent Role="dishes_order">
+              <PropertyRef Name="idDishes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_59">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="dishes_order" Type="Self.dishes_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="idOrder" />
+            </Principal>
+            <Dependent Role="dishes_order">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_64">
+          <End Role="restaurants" Type="Self.restaurants" Multiplicity="1" />
+          <End Role="dishes" Type="Self.dishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="restaurants">
+              <PropertyRef Name="idRestaurant" />
+            </Principal>
+            <Dependent Role="dishes">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_67">
+          <End Role="cities" Type="Self.cities" Multiplicity="1" />
+          <End Role="restaurants" Type="Self.restaurants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="restaurants">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_70">
+          <End Role="cities" Type="Self.cities" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_73">
+          <End Role="credentials" Type="Self.credentials" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credentials">
+              <PropertyRef Name="idCredentials" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="idCredentials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_76">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="idCustomer" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_79">
+          <End Role="delivery" Type="Self.delivery" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="delivery">
+              <PropertyRef Name="idDelivery" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="idDelivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_82">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="delivery" Type="Self.delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="idStaff" />
+            </Principal>
+            <Dependent Role="delivery">
+              <PropertyRef Name="idStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_85">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="availibility" Type="Self.availibility" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="idStaff" />
+            </Principal>
+            <Dependent Role="availibility">
+              <PropertyRef Name="idStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GharbiThambirajahProject2ModelStoreContainer">
+          <EntitySet Name="availibility" EntityType="Self.availibility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cities" EntityType="Self.cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="credentials" EntityType="Self.credentials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="delivery" EntityType="Self.delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dishes" EntityType="Self.dishes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dishes_order" EntityType="Self.dishes_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="restaurants" EntityType="Self.restaurants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_56" Association="Self.FK_56">
+            <End Role="dishes" EntitySet="dishes" />
+            <End Role="dishes_order" EntitySet="dishes_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_59" Association="Self.FK_59">
+            <End Role="order" EntitySet="order" />
+            <End Role="dishes_order" EntitySet="dishes_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_64" Association="Self.FK_64">
+            <End Role="restaurants" EntitySet="restaurants" />
+            <End Role="dishes" EntitySet="dishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_67" Association="Self.FK_67">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="restaurants" EntitySet="restaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_70" Association="Self.FK_70">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_73" Association="Self.FK_73">
+            <End Role="credentials" EntitySet="credentials" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_76" Association="Self.FK_76">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_79" Association="Self.FK_79">
+            <End Role="delivery" EntitySet="delivery" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_82" Association="Self.FK_82">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="delivery" EntitySet="delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_85" Association="Self.FK_85">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="availibility" EntitySet="availibility" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GharbiThambirajahProject2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="availibility">
+          <Key>
+            <PropertyRef Name="idAvailability" />
+          </Key>
+          <Property Name="idAvailability" Type="Int32" Nullable="false" />
+          <Property Name="isAvailable" Type="Byte" Nullable="false" />
+          <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idStaff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_85" FromRole="availibility" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="cities">
+          <Key>
+            <PropertyRef Name="idCity" />
+          </Key>
+          <Property Name="idCity" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="post_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="restaurants" Relationship="Self.FK_67" FromRole="cities" ToRole="restaurants" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_70" FromRole="cities" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="credentials">
+          <Key>
+            <PropertyRef Name="idCredentials" />
+          </Key>
+          <Property Name="idCredentials" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_73" FromRole="credentials" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="idCustomer" />
+          </Key>
+          <Property Name="idCustomer" Type="Int32" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idCity" Type="Int32" Nullable="false" />
+          <Property Name="idCredentials" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cities" Relationship="Self.FK_70" FromRole="customer" ToRole="cities" />
+          <NavigationProperty Name="credentials" Relationship="Self.FK_73" FromRole="customer" ToRole="credentials" />
+          <NavigationProperty Name="order" Relationship="Self.FK_76" FromRole="customer" ToRole="order" />
+        </EntityType>
+        <EntityType Name="delivery">
+          <Key>
+            <PropertyRef Name="idDelivery" />
+          </Key>
+          <Property Name="idDelivery" Type="Int32" Nullable="false" />
+          <Property Name="deliveryTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idStaff" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="Self.FK_79" FromRole="delivery" ToRole="order" />
+          <NavigationProperty Name="staff" Relationship="Self.FK_82" FromRole="delivery" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="dishes">
+          <Key>
+            <PropertyRef Name="idDishes" />
+          </Key>
+          <Property Name="idDishes" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idRestaurant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dishes_order" Relationship="Self.FK_56" FromRole="dishes" ToRole="dishes_order" />
+          <NavigationProperty Name="restaurants" Relationship="Self.FK_64" FromRole="dishes" ToRole="restaurants" />
+        </EntityType>
+        <EntityType Name="dishes_order">
+          <Key>
+            <PropertyRef Name="idDishes_Order" />
+          </Key>
+          <Property Name="idDishes" Type="Int32" Nullable="false" />
+          <Property Name="idDishes_Order" Type="Int32" Nullable="false" />
+          <Property Name="idOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dishes" Relationship="Self.FK_56" FromRole="dishes_order" ToRole="dishes" />
+          <NavigationProperty Name="order" Relationship="Self.FK_59" FromRole="dishes_order" ToRole="order" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdAt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idCustomer" Type="Int32" Nullable="false" />
+          <Property Name="idDelivery" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_76" FromRole="order" ToRole="customer" />
+          <NavigationProperty Name="delivery" Relationship="Self.FK_79" FromRole="order" ToRole="delivery" />
+          <NavigationProperty Name="dishes_order" Relationship="Self.FK_59" FromRole="order" ToRole="dishes_order" />
+        </EntityType>
+        <EntityType Name="restaurants">
+          <Key>
+            <PropertyRef Name="idRestaurant" />
+          </Key>
+          <Property Name="idRestaurant" Type="Int32" Nullable="false" />
+          <Property Name="merchant_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdAt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idCity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cities" Relationship="Self.FK_67" FromRole="restaurants" ToRole="cities" />
+          <NavigationProperty Name="dishes" Relationship="Self.FK_64" FromRole="restaurants" ToRole="dishes" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="idStaff" />
+          </Key>
+          <Property Name="idStaff" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="availibility" Relationship="Self.FK_85" FromRole="staff" ToRole="availibility" />
+          <NavigationProperty Name="delivery" Relationship="Self.FK_82" FromRole="staff" ToRole="delivery" />
+        </EntityType>
+        <Association Name="FK_85">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="availibility" Type="Self.availibility" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="idStaff" />
+            </Principal>
+            <Dependent Role="availibility">
+              <PropertyRef Name="idStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_67">
+          <End Role="cities" Type="Self.cities" Multiplicity="1" />
+          <End Role="restaurants" Type="Self.restaurants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="restaurants">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_70">
+          <End Role="cities" Type="Self.cities" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cities">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_73">
+          <End Role="credentials" Type="Self.credentials" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="credentials">
+              <PropertyRef Name="idCredentials" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="idCredentials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_76">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="idCustomer" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_79">
+          <End Role="delivery" Type="Self.delivery" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="delivery">
+              <PropertyRef Name="idDelivery" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="idDelivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_82">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="delivery" Type="Self.delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="idStaff" />
+            </Principal>
+            <Dependent Role="delivery">
+              <PropertyRef Name="idStaff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_56">
+          <End Role="dishes" Type="Self.dishes" Multiplicity="1" />
+          <End Role="dishes_order" Type="Self.dishes_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="dishes">
+              <PropertyRef Name="idDishes" />
+            </Principal>
+            <Dependent Role="dishes_order">
+              <PropertyRef Name="idDishes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_64">
+          <End Role="restaurants" Type="Self.restaurants" Multiplicity="1" />
+          <End Role="dishes" Type="Self.dishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="restaurants">
+              <PropertyRef Name="idRestaurant" />
+            </Principal>
+            <Dependent Role="dishes">
+              <PropertyRef Name="idRestaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_59">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="dishes_order" Type="Self.dishes_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="idOrder" />
+            </Principal>
+            <Dependent Role="dishes_order">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GharbiThambirajahProject2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="availibility" EntityType="Self.availibility" />
+          <EntitySet Name="cities" EntityType="Self.cities" />
+          <EntitySet Name="credentials" EntityType="Self.credentials" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="delivery" EntityType="Self.delivery" />
+          <EntitySet Name="dishes" EntityType="Self.dishes" />
+          <EntitySet Name="dishes_order" EntityType="Self.dishes_order" />
+          <EntitySet Name="order" EntityType="Self.order" />
+          <EntitySet Name="restaurants" EntityType="Self.restaurants" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <AssociationSet Name="FK_85" Association="Self.FK_85">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="availibility" EntitySet="availibility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_67" Association="Self.FK_67">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="restaurants" EntitySet="restaurants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_70" Association="Self.FK_70">
+            <End Role="cities" EntitySet="cities" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_73" Association="Self.FK_73">
+            <End Role="credentials" EntitySet="credentials" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_76" Association="Self.FK_76">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_79" Association="Self.FK_79">
+            <End Role="delivery" EntitySet="delivery" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_82" Association="Self.FK_82">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="delivery" EntitySet="delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_56" Association="Self.FK_56">
+            <End Role="dishes" EntitySet="dishes" />
+            <End Role="dishes_order" EntitySet="dishes_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_64" Association="Self.FK_64">
+            <End Role="restaurants" EntitySet="restaurants" />
+            <End Role="dishes" EntitySet="dishes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_59" Association="Self.FK_59">
+            <End Role="order" EntitySet="order" />
+            <End Role="dishes_order" EntitySet="dishes_order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GharbiThambirajahProject2ModelStoreContainer" CdmEntityContainer="GharbiThambirajahProject2Entities1">
+          <EntitySetMapping Name="availibility">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.availibility">
+              <MappingFragment StoreEntitySet="availibility">
+                <ScalarProperty Name="idAvailability" ColumnName="idAvailability" />
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="idStaff" ColumnName="idStaff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cities">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.cities">
+              <MappingFragment StoreEntitySet="cities">
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="post_code" ColumnName="post_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credentials">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.credentials">
+              <MappingFragment StoreEntitySet="credentials">
+                <ScalarProperty Name="idCredentials" ColumnName="idCredentials" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="idCredentials" ColumnName="idCredentials" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="delivery">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.delivery">
+              <MappingFragment StoreEntitySet="delivery">
+                <ScalarProperty Name="idDelivery" ColumnName="idDelivery" />
+                <ScalarProperty Name="deliveryTime" ColumnName="deliveryTime" />
+                <ScalarProperty Name="idStaff" ColumnName="idStaff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dishes">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.dishes">
+              <MappingFragment StoreEntitySet="dishes">
+                <ScalarProperty Name="idDishes" ColumnName="idDishes" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dishes_order">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.dishes_order">
+              <MappingFragment StoreEntitySet="dishes_order">
+                <ScalarProperty Name="idDishes" ColumnName="idDishes" />
+                <ScalarProperty Name="idDishes_Order" ColumnName="idDishes_Order" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="idDelivery" ColumnName="idDelivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="restaurants">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.restaurants">
+              <MappingFragment StoreEntitySet="restaurants">
+                <ScalarProperty Name="idRestaurant" ColumnName="idRestaurant" />
+                <ScalarProperty Name="merchant_name" ColumnName="merchant_name" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="GharbiThambirajahProject2Model.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="idStaff" ColumnName="idStaff" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
