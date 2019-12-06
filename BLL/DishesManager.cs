@@ -17,10 +17,15 @@ namespace BLL
             DishesDb = new DishesDB(configuration);
         }
 
-
-        public Dishes GetDishes(int id)
+        public List<Dishes> GetDishes()
         {
-            return DishesDb.GetDishes(id);
+            return DishesDb.GetDishes();
+        }
+
+
+        public Dishes GetDishe(int id)
+        {
+            return DishesDb.GetDishe(id);
         }
 
         public Dishes AddDishes(Dishes dishes)

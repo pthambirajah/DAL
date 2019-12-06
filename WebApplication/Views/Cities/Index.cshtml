@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DTO.Cities>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Covered cities :P</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.post_code)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.post_code)
+            </td>
+            <!--<td>
+        Html.ActionLink("Edit", "Edit", new { id=item.idCity }) |
+        Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>-->
+        </tr>
+}
+    </tbody>
+</table>

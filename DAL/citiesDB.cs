@@ -16,7 +16,46 @@ namespace DAL
             }
 
 
-            public Cities GetCities(int id)
+        public List<Cities> GetCities()
+        {
+            List<Cities> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM cities";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Cities>();
+
+                            Cities city = new Cities();
+
+                            city.idCity = (int)dr["idCity"];
+                            city.city = (string)dr["city"];
+                            city.post_code = (string)dr["post_code"];
+                            
+                            results.Add(city);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
+        public Cities GetCity(int id)
             {
             Cities cities = null;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -39,7 +78,7 @@ namespace DAL
 
                             cities.idCity = (int)dr["idCity"];
                             cities.city = (string)dr["city"];
-                            cities.post_code = (int)dr["post_code"];
+                            cities.post_code = (string)dr["post_code"];
 
                             }
                         }

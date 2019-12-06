@@ -11,6 +11,7 @@ namespace BLL
         IStaffDB StaffDB { get; }
 
         Staff AddStaff(Staff staff);
+        Staff GetStaff(int id);
 
 
         Staff UpdateStaff(Staff staff);

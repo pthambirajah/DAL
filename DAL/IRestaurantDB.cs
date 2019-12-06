@@ -13,6 +13,7 @@ namespace DAL
         Restaurant AddRestaurant(Restaurant restaurant);
         int DeleteRestaurant(int id);
         Restaurant GetRestaurant(int id);
+        List<Restaurant> GetRestaurants();
         int UpdateRestaurant(Restaurant restaurant);
     }
 }

@@ -2,8 +2,8 @@
 using BLL;
 using DAL;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.IO;
+using DTO;
 
 namespace ConsoleApp
 {
@@ -16,11 +16,10 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             var staffDbManager = new StaffManager(Configuration);
-            var staffDb = new StaffDB(Configuration);
 
             //Get all hotels
-            Console.WriteLine("--GET ALL HOTELS--");
-            var staff = staffDbManager.GetStaff(1);
+            Console.WriteLine("--GET 1 staff--");
+            Staff staff = staffDbManager.GetStaff(1);
             Console.WriteLine("Check db");
             Console.WriteLine(staff.name);
 

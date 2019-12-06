@@ -10,7 +10,8 @@ namespace DAL
 
         Cities AddCities (Cities cities);
         int DeleteCities(int id);
-        Cities GetCities(int id);
+        Cities GetCity(int id);
+        List<Cities> GetCities();
         int UpdateCities(Cities cities);
     }
 }

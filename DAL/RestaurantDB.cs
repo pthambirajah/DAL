@@ -15,7 +15,8 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Restaurant> GetRestaurant()
+
+        public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -24,7 +25,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM restaurant";
+                    string query = "SELECT * FROM restaurants";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -65,7 +66,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM restaurant WHERE idRestaurant = @id";
+                    string query = "SELECT * FROM restaurants WHERE idRestaurant = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -102,7 +103,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO restaurant(merchant_name, createdAt, idCity) VALUES(@merchant_name, @createdAt, @idCity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO restaurants(merchant_name, createdAt, idCity) VALUES(@merchant_name, @createdAt, @idCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", restaurant.merchant_name);
                     cmd.Parameters.AddWithValue("@description", restaurant.createdAt);
@@ -130,7 +131,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE restaurant SET merchant_name=@merchant_name, createdAt=@createdAt, idCity=@idCity WHERE idRestaurant=@id";
+                    string query = "UPDATE restaurants SET merchant_name=@merchant_name, createdAt=@createdAt, idCity=@idCity WHERE idRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", restaurant.merchant_name);
                     cmd.Parameters.AddWithValue("@description", restaurant.createdAt);
@@ -158,7 +159,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM restaurant WHERE idRestaurant=@id";
+                    string query = "DELETE FROM restaurants WHERE idRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

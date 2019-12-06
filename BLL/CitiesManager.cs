@@ -15,10 +15,13 @@ namespace BLL
             CitiesDb = new CitiesDB(configuration);
         }
 
-
-        public Cities GetCities(int id)
+        public List<Cities> GetCities()
         {
-            return CitiesDb.GetCities(id);
+            return CitiesDb.GetCities();
+        }
+        public Cities GetCity(int id)
+        {
+            return CitiesDb.GetCity(id);
         }
 
         public Cities AddCities(Cities cities)

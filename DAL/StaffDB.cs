@@ -36,9 +36,9 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            staff = new Staff();
 
-                            staff.idStaff = (int)dr["idStaff"];
+                        
+                            staff.idStaff = (int)dr["IdStaff"];
                             staff.name = (string)dr["name"];
                         }
                     }

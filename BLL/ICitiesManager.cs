@@ -6,13 +6,13 @@ using DTO;
 
 namespace BLL
 {
-    interface ICitiesManager
+    public interface ICitiesManager
     {
         ICitiesDB CitiesDB { get; }
 
         Cities AddCities(Cities cities);
         Cities UpdateCities(Cities cities);
-
+        List<Cities> GetCities();
         Cities DeleteCities(int id);
     }
 }

@@ -15,8 +15,47 @@ namespace DAL
             Configuration = configuration;
         }
 
+        public List<Dishes> GetDishes()
+        {
+            List<Dishes> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-        public Dishes GetDishes(int id)
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM dishes";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Dishes>();
+
+                            Dishes dishes = new Dishes();
+
+                            dishes.idDishes = (int)dr["idDishes"];
+                            dishes.name = (string)dr["name"];
+                            dishes.price = (int)dr["price"];
+                            dishes.idRestaurant = (int)dr["idRestaurant"];
+
+                            results.Add(dishes);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
+        public Dishes GetDishe(int id)
         {
             Dishes dishes = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -39,8 +78,7 @@ namespace DAL
 
                             dishes.idDishes = (int)dr["idDishes"];
                             dishes.name = (string)dr["name"];
-                            dishes.price = (string)dr["price"];
-                            dishes.status = (string)dr["status"];
+                            dishes.price = (int)dr["price"];
                             dishes.idRestaurant = (int)dr["idRestaurant"];
 
 
@@ -64,11 +102,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO dishes(name, price, status, idRestaurant) VALUES(@name, @price, @status, @idRestaurant); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO dishes(name, price, idRestaurant) VALUES(@name, @price, @idRestaurant); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", dishes.name);
                     cmd.Parameters.AddWithValue("@price", dishes.price);
-                    cmd.Parameters.AddWithValue("@status", dishes.status);
                     cmd.Parameters.AddWithValue("@idRestaurant", dishes.idRestaurant);
 
                     cn.Open();
@@ -93,11 +130,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE dishes SET name=@name, price=@price, status=@status, idRestaurant=@idRestaurant WHERE idOrder=@id";
+                    string query = "UPDATE dishes SET name=@name, price=@price, idRestaurant=@idRestaurant WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", dishes.name);
                     cmd.Parameters.AddWithValue("@price", dishes.price);
-                    cmd.Parameters.AddWithValue("@status", dishes.status);
                     cmd.Parameters.AddWithValue("@idRestaurant", dishes.idRestaurant);
 
                     cn.Open();

@@ -8,7 +8,7 @@ namespace DTO
     {
         public int idCity { get; set; }
         public string city { get; set; }
-        public int post_code { get; set; }
+        public string post_code { get; set; }
         /*
         public static implicit operator Cities(global::DAL.CitiesDB v)
         {

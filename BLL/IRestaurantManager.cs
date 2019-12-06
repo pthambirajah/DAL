@@ -12,6 +12,7 @@ namespace BLL
 
         Restaurant AddRestaurant(Restaurant restaurant);
 
+        List<Restaurant> GetRestaurants();
 
         Restaurant UpdateRestaurant(Restaurant restaurant);
 
