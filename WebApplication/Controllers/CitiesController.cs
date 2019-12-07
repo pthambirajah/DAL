@@ -24,5 +24,17 @@ namespace WebApplication.Controllers
             return View(cManager.GetCities());
         }
 
+        public ActionResult Restaurants(int id)
+        {
+            RestaurantManager rManager = new RestaurantManager(Configuration);
+            return View(rManager.GetRestaurantsOfCity(id));
+        }
+
+        public ActionResult Dishes(int id)
+        {
+            DishesManager dManager = new DishesManager(Configuration);
+            return View(dManager.GetDishesOfRestaurant(id));
+        }
+
     }
 }

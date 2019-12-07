@@ -22,5 +22,7 @@ namespace WebApplication.Controllers
             RestaurantManager rManager = new RestaurantManager(Configuration);
             return View(rManager.GetRestaurants());
         }
+
+        
     }
 }

@@ -11,6 +11,8 @@ namespace BLL
         IDishesDB DishesDB { get; }
         List<Dishes> GetDishes();
 
+        List<Dishes> GetDishesOfRestaurant(int id);
+
         Dishes AddDishes(Dishes dishes);
 
         Dishes UpdateDishes(Dishes dishes);

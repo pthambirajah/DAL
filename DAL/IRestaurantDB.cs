@@ -14,6 +14,8 @@ namespace DAL
         int DeleteRestaurant(int id);
         Restaurant GetRestaurant(int id);
         List<Restaurant> GetRestaurants();
+
+        List<Restaurant> GetRestaurantsOfCity(int id);
         int UpdateRestaurant(Restaurant restaurant);
     }
 }

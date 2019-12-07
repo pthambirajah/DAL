@@ -15,4 +15,10 @@
     <ProjectReference Include="..\DTO\DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Shared\Dishes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

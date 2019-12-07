@@ -15,6 +15,48 @@ namespace DAL
             Configuration = configuration;
         }
 
+        
+            public List<Restaurant> GetRestaurantsOfCity(int id)
+            {
+            List<Restaurant> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM restaurants WHERE idCity=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Restaurant>();
+
+                            Restaurant restaurant = new Restaurant();
+
+                            restaurant.idRestaurant = (int)dr["idRestaurant"];
+                            restaurant.merchant_name = (string)dr["merchant_name"];
+                            restaurant.createdAt = (string)dr["createdAt"];
+                            restaurant.idCity = (int)dr["idCity"];
+
+                            results.Add(restaurant);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
 
         public List<Restaurant> GetRestaurants()
         {

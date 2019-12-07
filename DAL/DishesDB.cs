@@ -14,7 +14,47 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        public List<Dishes> GetDishesOfRestaurant(int id)
+        {
+            List<Dishes> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM dishes WHERE idRestaurant = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Dishes>();
+
+                            Dishes dishes = new Dishes();
+
+                            dishes.idDishes = (int)dr["idDishes"];
+                            dishes.name = (string)dr["name"];
+                            dishes.price = (int)dr["price"];
+                            dishes.idRestaurant = (int)dr["idRestaurant"];
+
+                            results.Add(dishes);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+        }
         public List<Dishes> GetDishes()
         {
             List<Dishes> results = null;

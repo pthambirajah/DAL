@@ -14,6 +14,8 @@ namespace BLL
 
         List<Restaurant> GetRestaurants();
 
+        List<Restaurant> GetRestaurantsOfCity(int id);
+
         Restaurant UpdateRestaurant(Restaurant restaurant);
 
         Restaurant DeleteRestaurant(int id);
