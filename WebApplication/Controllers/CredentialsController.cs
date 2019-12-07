@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using DTO;
 using BLL;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication.Controllers
 {
@@ -18,52 +17,46 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        /*
+        
         [HttpPost]
-        public ActionResult Autherize(Credentials credModel)
+        public ActionResult Index(Credentials credModel)
         {
-            string usernameC;
-            string passwordC;
+            string usernameC = credModel.username;
+            string passwordC = credModel.password;
 
-            var customerDbManager = new CredentialsManager(Configuration);
-            int idCustomerTryingToConnect = customerDbManager.GetIdCredentials(usernameC);
+            var credentialsDbManager = new CredentialsManager(Configuration);
+            int idCustomerTryingToConnect = credentialsDbManager.GetIdCredentials(usernameC);
 
             //En fonction de l'id du customer
-            while (passwordC != customerDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
+            //while (passwordC != credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
+            if (passwordC == credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             {
-
-                Console.WriteLine(passwordC);
-                Console.WriteLine("Connection denied. Try again");
-
-                Console.WriteLine("Username");
-                usernameC = Console.ReadLine();
-
-                Console.WriteLine("Password");
-                passwordC = Console.ReadLine();
-
-                idCustomerTryingToConnect = customerDbManager.GetIdCredentials(usernameC);
+                ViewBag.Name = usernameC;
+                return RedirectToAction("Index", "Home");
             }
-
-            Console.WriteLine("Connection successful");
-
+            else
+            {
+                return RedirectToAction("Index", "Cities");
+            }
         }
 
 
-        public ActionResult LogOut()
+       /* public ActionResult LogOut()
         {
             int userId = (int)Session["userID"];
             Session.Abandon();
             return RedirectToAction("Index", "Login");
-        }
+        }*/
 
     }
-    */
+
+    
 
 
-}
 }

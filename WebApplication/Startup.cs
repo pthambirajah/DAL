@@ -31,7 +31,7 @@ namespace WebApplication
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSession();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -47,11 +47,12 @@ namespace WebApplication
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
+            app.UseMvc();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
