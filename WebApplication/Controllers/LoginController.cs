@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -13,7 +13,7 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-
+        /*
         [HttpPost]
         public ActionResult Autherize(Models.credentials userModel)
         {
@@ -32,7 +32,7 @@ namespace WebApplication.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-        }C:\Users\alexg\source\repos\DAL\DAL\IavailabilityDB.cs
+        }
 
         public ActionResult LogOut()
         {
@@ -40,6 +40,7 @@ namespace WebApplication.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Login");
         }
-
+        */
     }
 }
+

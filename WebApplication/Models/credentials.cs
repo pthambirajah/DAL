@@ -11,9 +11,7 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class credentials
     {
         public credentials()
@@ -22,18 +20,9 @@ namespace WebApplication.Models
         }
     
         public int idCredentials { get; set; }
-
-        [DisplayName("User Name")] //changing the default "UserName" by putting a space (called in the view)
-        [Required(ErrorMessage = "This field is required.")]
         public string username { get; set; }
-
-        [DataType(DataType.Password)] //so what we type is hidden behind the usual "dots"
-        [Required(ErrorMessage = "This field is required.")]
         public string password { get; set; }
-        
-
-        public string LoginErrorMessage { get; set; }
-
+    
         public virtual ICollection<customer> customer { get; set; }
     }
 }
