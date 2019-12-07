@@ -37,5 +37,21 @@ namespace BLL
         {
             return CredentialsDb.DeleteCredentials(id);
         }
+
+        /*
+        public int GetIdCustomer(string usernameC)
+        {
+            throw new NotImplementedException();
+        }
+        */
+        public int GetIdCredentials(string username)
+        {
+            return CredentialsDb.GetIdCredentials(username);
+        }
+
+        public string GetPassword(int idCredentials, string username)
+        {
+            return CredentialsDb.GetPassword(idCredentials, username);
+        }
     }
 }

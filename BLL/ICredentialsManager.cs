@@ -14,5 +14,9 @@ namespace BLL
 
         Credentials UpdateCredentials(Credentials credentials);
         Credentials DeleteCredentials(int id);
+
+        Credentials GetIdCredentials(string username);
+        Credentials GetPassword(int idCredentials, string username);
+
     }
 }

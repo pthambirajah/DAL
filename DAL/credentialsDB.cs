@@ -134,5 +134,75 @@ namespace DAL
 
             return result;
         }
+
+
+        //GET ID CREDENTIALS EN FONCTION D'UN USERNAME
+        public int GetIdCredentials(string username)
+        {
+            int idCustomer = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select idCredentials from credentials WHERE username=@username";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("username", username);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            idCustomer = (int)dr["idCredentials"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return idCustomer;
+        }
+
+        public string GetPassword(int idCredentials, string username)
+        {
+            string password = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select password from credentials WHERE idCredentials=@idCredentials AND username=@username";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("username", username);
+                    cmd.Parameters.AddWithValue("idCredentials", idCredentials);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            password = (string)dr["password"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return password;
+        }
+
     }
 }
