@@ -132,5 +132,41 @@ namespace DAL
 
             return result;
         }
+
+        public Dishes_order GetDishes_orderByStaff(int id)
+        {
+            Dishes_order dishes_order = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT delivery.idStaff FROM dishes_order d INNER JOIN order o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            dishes_order = new Dishes_order();
+
+                            dishes_order.idDishes_Order = (int)dr["idDishes_Order"];
+                            dishes_order.idDishes = (int)dr["idDishes"];
+                            dishes_order.idOrder = (int)dr["idOrder"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return dishes_order;
+        }
     }
 }
