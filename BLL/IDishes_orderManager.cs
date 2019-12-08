@@ -15,5 +15,8 @@ namespace BLL
         Dishes_order UpdateDishes_order(Dishes_order dishes_order);
 
         Dishes_order DeleteDishes_order(int id);
+
+        Dishes_order GetDishes_orderByStaff(int id);
+
     }
 }
