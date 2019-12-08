@@ -10,5 +10,6 @@ namespace DTO
         public int idDishes_Order { get; set; }
         public int idDishes { get; set; }
         public int idOrder { get; set; }
+        public int quantity { get; set; }
     }
 }

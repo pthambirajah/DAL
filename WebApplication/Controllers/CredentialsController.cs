@@ -20,6 +20,7 @@ namespace WebApplication.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
             return View();
         }
 
@@ -37,7 +38,7 @@ namespace WebApplication.Controllers
             //while (passwordC != credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             if (passwordC == credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             {
-                ViewBag.Name = usernameC;
+                HttpContext.Session.SetString("username", usernameC);
                 return RedirectToAction("Index", "Home");
             }
             else
