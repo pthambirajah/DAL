@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -20,6 +21,7 @@ namespace WebApplication.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
             CitiesManager cManager = new CitiesManager(Configuration);
             return View(cManager.GetCities());
         }
