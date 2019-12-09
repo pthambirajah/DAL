@@ -53,5 +53,10 @@ namespace BLL
         {
             return CredentialsDb.GetPassword(idCredentials, username);
         }
+
+        public bool isAdmin(string username)
+        {
+            return CredentialsDb.isAdmin(username);
+        }
     }
 }

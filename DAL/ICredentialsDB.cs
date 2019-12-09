@@ -11,5 +11,6 @@ namespace DAL
         int DeleteCredentials(int id);
         Credentials GetCredentials (int id);
         int UpdateCredentials(Credentials credentials);
+        bool isAdmin(string username);
     }
 }

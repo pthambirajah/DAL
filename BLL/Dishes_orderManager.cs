@@ -39,7 +39,7 @@ namespace BLL
             return Dishes_orderDb.DeleteDishes_order(id);
         }
 
-        public Dishes_order GetDishes_orderByStaff(int id)
+        public List<deliveryItem> GetDishes_orderByStaff(int id)
         {
             return Dishes_orderDb.GetDishes_orderByStaff(id);        
         }

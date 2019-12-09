@@ -107,6 +107,8 @@ namespace DAL
             return result;
         }
 
+
+
         public int DeleteDishes_order(int id)
         {
             int result = 0;
@@ -133,16 +135,19 @@ namespace DAL
             return result;
         }
 
-        public Dishes_order GetDishes_orderByStaff(int id)
+       
+        public List<deliveryItem> GetDishes_orderByStaff(int id)
         {
-            Dishes_order dishes_order = null;
+            List<deliveryItem> deliveryBundle = null;
+            var name = "";
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT delivery.idStaff FROM dishes_order d INNER JOIN order o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery";
+                    //string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime  FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id";
+                    string query = "SELECT firstname FROM customer WHERE idCustomer = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -150,13 +155,27 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        if (dr.Read())
+                        while (dr.Read())
                         {
-                            dishes_order = new Dishes_order();
+                            if (deliveryBundle == null)
+                                deliveryBundle = new List<deliveryItem>();
 
-                            dishes_order.idDishes_Order = (int)dr["idDishes_Order"];
-                            dishes_order.idDishes = (int)dr["idDishes"];
-                            dishes_order.idOrder = (int)dr["idOrder"];
+                            deliveryItem deliveryItem = new deliveryItem();
+
+                            if (dr["firstname"] != null) {
+                                name = (string)dr["firstname"];
+                            }/*
+                            deliveryItem.Customer.lastname = (string)dr["lastname"];
+                            deliveryItem.Customer.firstname = (string)dr["firstname"];
+                            deliveryItem.Customer.address = (string)dr["address"];
+                            deliveryItem.Customer.idCity = (int)dr["idCity"];
+                            deliveryItem.Delivery.deliveryTime = (DateTime)dr["deliveryTime"];
+                            */
+                            else
+                            {
+                                name = "Peter";
+                            }
+                            //deliveryBundle.Add(deliveryItem);
                         }
                     }
                 }
@@ -166,7 +185,7 @@ namespace DAL
                 throw e;
             }
 
-            return dishes_order;
+            return deliveryBundle;
         }
     }
 }

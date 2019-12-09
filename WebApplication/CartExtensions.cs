@@ -6,11 +6,12 @@ namespace WebApplication
 {
     public static class CartExtensions
     {
+        /*
         private const string CartSessionKey = "cart";
 
         public static List<Dishes> GetCart(this ISession session)
         {
-            return HttpContext.Session.GetString("username");
+            //return HttpContext.Session.GetString("username");
             //return session.GetObjectFromJson<List<Dishes>>(CartSessionKey) ?? new List<Dishes>();
         }
 
@@ -19,5 +20,6 @@ namespace WebApplication
             session.SetObjectAsJson(CartSessionKey, cart);
             
         }
+        */
     }
 }

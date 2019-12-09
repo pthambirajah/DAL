@@ -17,11 +17,11 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
-        public IActionResult Index(int id)
+        public IActionResult Index( int id)
         {
             ViewBag.username = HttpContext.Session.GetString("username");
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
-            return View(dManager.GetDishes_orderByStaff(id));
+            return View(dManager.GetDishes_orderByStaff(2));
         }
     }
 }

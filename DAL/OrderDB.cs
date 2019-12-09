@@ -25,7 +25,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM order WHERE idOrder = @id";
+                    string query = "SELECT * FROM commande WHERE idOrder = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -64,7 +64,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO order(status, createdAt, idCustomer, idDelivery) VALUES(@status, @createdAt, @idCustomer, @idDelivery); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO commande(status, createdAt, idCustomer, idDelivery) VALUES(@status, @createdAt, @idCustomer, @idDelivery); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@status", order.status);
                     cmd.Parameters.AddWithValue("@createdAt", order.createdAt);
@@ -93,7 +93,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE restaurant SET status=@status, createdAt=@createdAt, idCustomer=@idCustomer, idDelivery=@idDelivery WHERE idOrder=@id";
+                    string query = "UPDATE commande SET status=@status, createdAt=@createdAt, idCustomer=@idCustomer, idDelivery=@idDelivery WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@status", order.status);
                     cmd.Parameters.AddWithValue("@createdAt", order.createdAt);
@@ -122,7 +122,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM order WHERE idOrder=@id";
+                    string query = "DELETE FROM commande WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

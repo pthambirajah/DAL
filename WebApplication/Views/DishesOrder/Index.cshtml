@@ -1,53 +1,60 @@
-﻿@model IEnumerable<DTO.Dishes_order>
+﻿@model IEnumerable<DTO.deliveryItem>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Dishes By Order</h2>
+<h2>Index</h2>
 
-<!--<p>
-    <a asp-action="">Create New</a>
-</p>-->
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idDishes_Order)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.idDishes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.idOrder)
-            </th>
-
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Dishes.name)</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Customer.lastname)</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Customer.firstname)</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Customer.address)</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Customer.idCity)</th>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Delivery.deliveryTime)</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idDishes_Order)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idDishes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idOrder)
-                </td>
-
-                <!--
-                  <td>
-                    Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>-->
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dishes.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.idCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Delivery.deliveryTime)
+            </td>
+            <td>
+                @Html.ActionLink("Cancelled", "Cancelled", new { /* id=item.PrimaryKey */ }) |
+                <!--Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
+            </td>
+        </tr>
         }
     </tbody>
 </table>
-
-

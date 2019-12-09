@@ -170,6 +170,44 @@ namespace DAL
             return idCustomer;
         }
 
+        //GET ID CREDENTIALS EN FONCTION D'UN USERNAME
+        public bool isAdmin(string username)
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            int accessLevel = 0;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select status from credentials WHERE username=@username";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("username", username);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            accessLevel = (int)dr["status"];
+                        }
+
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            if (accessLevel == 2)
+                return true;
+            else
+                return false;
+        }
+
         public string GetPassword(int idCredentials, string username)
         {
             string password = null;

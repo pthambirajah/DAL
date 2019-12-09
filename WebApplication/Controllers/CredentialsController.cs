@@ -39,6 +39,10 @@ namespace WebApplication.Controllers
             if (passwordC == credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             {
                 HttpContext.Session.SetString("username", usernameC);
+                if (credentialsDbManager.isAdmin(usernameC))
+                {
+                    return RedirectToAction("Index", "DishesOrder", new { id = 2 });
+                }
                 return RedirectToAction("Index", "Home");
             }
             else
