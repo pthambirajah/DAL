@@ -25,13 +25,7 @@ namespace WebApplication.Controllers
             return View(dManager.GetDishes());
         }
 
-        public ActionResult AddToCart(int id)
-        {
-            ViewBag.username = HttpContext.Session.GetString("username");
-           // HttpContext.Session.Set("cart", id);
-            DishesManager dManager = new DishesManager(Configuration);
-            return View(dManager.GetDishes());
-        }
+      
 
         
     }

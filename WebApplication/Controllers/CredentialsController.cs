@@ -34,7 +34,7 @@ namespace WebApplication.Controllers
             var credentialsDbManager = new CredentialsManager(Configuration);
             int idCustomerTryingToConnect = credentialsDbManager.GetIdCredentials(usernameC);
 
-            //En fonction de l'id du customer
+            //En fonction de l'id du customer - Alex Piguet Pute
             //while (passwordC != credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             if (passwordC == credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             {
@@ -46,14 +46,6 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index", "Cities");
             }
         }
-
-
-       /* public ActionResult LogOut()
-        {
-            int userId = (int)Session["userID"];
-            Session.Abandon();
-            return RedirectToAction("Index", "Login");
-        }*/
 
     }
 
