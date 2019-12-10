@@ -4,27 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Order to deliver</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Dishes.name)</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Customer.lastname)</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Customer.firstname)</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Customer.address)</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Customer.idCity)</th>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Delivery.deliveryTime)</th>
+            <th>@Html.DisplayNameFor(model => model.dishesname)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.lastname)</th>
+            <th>@Html.DisplayNameFor(model => model.firstname)</th>
+            <th>@Html.DisplayNameFor(model => model.address)</th>
+            <th>@Html.DisplayNameFor(model => model.idCity)</th>
+            <th>@Html.DisplayNameFor(model => model.deliveryTime)</th>
         </tr>
     </thead>
     <tbody>
@@ -32,27 +23,30 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Dishes.name)
+                @Html.DisplayFor(modelItem => item.dishesname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.lastname)
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.firstname)
+                @Html.DisplayFor(modelItem => item.lastname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.address)
+                @Html.DisplayFor(modelItem => item.firstname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.idCity)
+                @Html.DisplayFor(modelItem => item.address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Delivery.deliveryTime)
+                @Html.DisplayFor(modelItem => item.idCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deliveryTime)
             </td>
             <td>
                 @Html.ActionLink("Cancelled", "Cancelled", new { /* id=item.PrimaryKey */ }) |
                 <!--Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
+        Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
             </td>
         </tr>
         }

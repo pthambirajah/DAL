@@ -21,7 +21,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.username = HttpContext.Session.GetString("username");
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
-            return View(dManager.GetDishes_orderByStaff(2));
+            return View(dManager.GetDishes_orderByStaff(id));
         }
     }
 }

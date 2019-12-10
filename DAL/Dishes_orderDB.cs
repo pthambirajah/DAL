@@ -146,8 +146,8 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    //string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime  FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id";
-                    string query = "SELECT firstname FROM customer WHERE idCustomer = @id";
+                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime, d.quantity  FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id";
+                    
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -162,20 +162,15 @@ namespace DAL
 
                             deliveryItem deliveryItem = new deliveryItem();
 
-                            if (dr["firstname"] != null) {
-                                name = (string)dr["firstname"];
-                            }/*
-                            deliveryItem.Customer.lastname = (string)dr["lastname"];
-                            deliveryItem.Customer.firstname = (string)dr["firstname"];
-                            deliveryItem.Customer.address = (string)dr["address"];
-                            deliveryItem.Customer.idCity = (int)dr["idCity"];
-                            deliveryItem.Delivery.deliveryTime = (DateTime)dr["deliveryTime"];
-                            */
-                            else
-                            {
-                                name = "Peter";
-                            }
-                            //deliveryBundle.Add(deliveryItem);
+                            deliveryItem.dishesname = (string)dr["name"];
+                            deliveryItem.lastname = (string)dr["lastname"];
+                            deliveryItem.firstname = (string)dr["firstname"];
+                            deliveryItem.address = (string)dr["address"];
+                            deliveryItem.idCity = (int)dr["idCity"];
+                            deliveryItem.deliveryTime = (TimeSpan)dr["deliveryTime"];
+                            deliveryItem.Quantity = (int)dr["quantity"];
+                            
+                            deliveryBundle.Add(deliveryItem);
                         }
                     }
                 }

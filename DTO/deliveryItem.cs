@@ -7,11 +7,19 @@ namespace DTO
 {
     public class deliveryItem
     {
+        public string dishesname { get; set; }
 
-        public Dishes Dishes { get; set; }
-        public Customer Customer { get; set; }
+        public string firstname { get; set; }
 
-        public Delivery Delivery { get; set; }
+        public string lastname { get; set; }
+
+        public string address { get; set; }
+
+        public int idCity { get; set; }
+
+        public TimeSpan deliveryTime { get; set; }
+
+        public int Quantity { get; set; }
 
     }
 }
