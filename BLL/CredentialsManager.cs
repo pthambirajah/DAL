@@ -58,5 +58,16 @@ namespace BLL
         {
             return CredentialsDb.isAdmin(username);
         }
+
+        public int GetIdStaff(string username)
+        {
+            return CredentialsDb.GetIdStaff(username);
+        }
+
+        public bool isStaff(string username)
+        {
+            return CredentialsDb.isStaff(username);
+        }
+
     }
 }

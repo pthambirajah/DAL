@@ -242,5 +242,77 @@ namespace DAL
             return password;
         }
 
+
+        //GET ID STAFF EN FONCTION D'UN USERNAME
+        public int GetIdStaff(string username)
+        {
+            int idStaff = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT idStaff FROM staff INNER JOIN credentials c ON staff.FK_idCredentials = c.idCredentials WHERE c.username = @username";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("username", username);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            idStaff = (int)dr["idStaff"];
+                        }
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return idStaff;
+        }
+
+        public bool isStaff (string username)
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            int accessLevel = 0;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select status from credentials WHERE username=@username";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("username", username);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            accessLevel = (int)dr["status"];
+                        }
+
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            if (accessLevel == 1)
+                return true;
+            else
+                return false;
+        }
+
     }
 }

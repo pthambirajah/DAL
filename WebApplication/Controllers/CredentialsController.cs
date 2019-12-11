@@ -33,6 +33,7 @@ namespace WebApplication.Controllers
 
             var credentialsDbManager = new CredentialsManager(Configuration);
             int idCustomerTryingToConnect = credentialsDbManager.GetIdCredentials(usernameC);
+            int retrievedIdStaff = credentialsDbManager.GetIdCredentials(usernameC);
 
             //En fonction de l'id du customer - Alex Piguet Pute
             //while (passwordC != credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
@@ -41,8 +42,18 @@ namespace WebApplication.Controllers
                 HttpContext.Session.SetString("username", usernameC);
                 if (credentialsDbManager.isAdmin(usernameC))
                 {
-                    return RedirectToAction("Index", "DishesOrder", new { id = 2 });
+                    return RedirectToAction("Index", "DishesOrder", new { id = 1 });
                 }
+
+               else if (credentialsDbManager.isStaff(usernameC))
+                {
+
+                int id2 = retrievedIdStaff;
+
+                    return RedirectToAction("Index", "DishesOrder", new { id = retrievedIdStaff });
+
+                }
+
                 return RedirectToAction("Index", "Home");
             }
             else
