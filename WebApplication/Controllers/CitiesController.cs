@@ -46,6 +46,18 @@ namespace WebApplication.Controllers
             
             DishesManager dManager = new DishesManager(Configuration);
             Dishes dishe = new Dishes();
+            int price = dManager.GetDishePrice(id);
+
+            if (HttpContext.Session.GetInt32("TotalAmount") != null) {
+
+                HttpContext.Session.SetInt32("TotalAmount", (price + (int)HttpContext.Session.GetInt32("TotalAmount")));
+            }
+            else
+            {
+                HttpContext.Session.SetInt32("TotalAmount", price );
+            }
+            
+
 
             if (SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
             {

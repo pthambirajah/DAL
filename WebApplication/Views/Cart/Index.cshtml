@@ -4,34 +4,50 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Cart</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Dishe.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dishe.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id=item.Dishe.idDishes })
-            </td>
-        </tr>
-
-}
-    </tbody>
-</table>
+<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:50%">@Html.DisplayNameFor(model => model.Dishe.name)</th>
+                <!--<th style="width:10%">Price</th>-->
+                <th style="width:8%"> @Html.DisplayNameFor(model => model.Quantity)</th>
+                <!--<th style="width:22%" class="text-center">Subtotal</th>-->
+                <th style="width:10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-th="Product">
+                        <div class="row">
+                            <!--<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>-->
+                            <div class="col-sm-10">
+                                <h4 class="nomargin">@Html.DisplayFor(modelItem => item.Dishe.name)</h4>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Quantity">
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td class="actions" data-th="">
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="visible-xs">
+                <td class="text-center"><strong>@Html.Raw(ViewBag.totalAmount)</strong></td>
+            </tr>
+            <tr>
+                <td><a href="" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continue Shopping</a></td>
+                <td colspan="2" class="hidden-xs"></td>
+                <td class="hidden-xs text-center"><strong>@Html.Raw(ViewBag.totalAmount)</strong></td>
+                <td><a href="https://www.paypal.com/webapps/hermes?token=5EY097812P7754247&useraction=commit&mfid=1546377013907_cf1dec6830d7" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

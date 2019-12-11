@@ -134,6 +134,38 @@ namespace DAL
             return dishes;
         }
 
+        public int GetDishePrice(int id)
+        {
+            int dishePrice = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT price FROM dishes WHERE idDishes = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            dishePrice = (int)dr["price"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return dishePrice;
+        }
+
         public Dishes AddDishes(Dishes dishes)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

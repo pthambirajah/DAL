@@ -14,5 +14,6 @@ namespace DAL
         List<Dishes> GetDishes();
         List<Dishes> GetDishesOfRestaurant(int id);
         int UpdateDishes(Dishes dishes);
+        int GetDishePrice(int id);
     }
 }
