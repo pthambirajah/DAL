@@ -11,7 +11,7 @@ namespace BLL
         ICredentialsDB CredentialsDB { get; }
 
         Credentials AddCredentials(Credentials credentials);
-
+        
         Credentials UpdateCredentials(Credentials credentials);
         Credentials DeleteCredentials(int id);
 

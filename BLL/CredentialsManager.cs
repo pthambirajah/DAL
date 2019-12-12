@@ -10,7 +10,7 @@ namespace BLL
     {
         public CredentialsDB CredentialsDb { get; }
 
-
+       
         public CredentialsManager(IConfiguration configuration)
         {
             CredentialsDb = new CredentialsDB(configuration);

@@ -59,6 +59,38 @@ namespace DAL
             return customer;
         }
 
+        public int GetCustomerIDByCredentials(int id)
+        {
+            int iDCustomer = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT idCustomer FROM customer WHERE idCredentials = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                           iDCustomer = (int)dr["idCustomer"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return iDCustomer;
+        }
+
         public Customer AddCustomer(Customer customer)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

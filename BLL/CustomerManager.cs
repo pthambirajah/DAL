@@ -15,7 +15,10 @@ namespace BLL
         {
             CustomerDb = new CustomerDB(configuration);
         }
-
+        public int GetCustomerIDByCredentials(int id)
+        {
+            return CustomerDb.GetCustomerIDByCredentials(id);
+        }
 
         public Customer GetCustomer(int id)
         {

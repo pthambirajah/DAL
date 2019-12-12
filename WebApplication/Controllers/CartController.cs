@@ -42,7 +42,9 @@ namespace WebApplication.Controllers
         public IActionResult ProceedCheckout(int idAvailability, int idStaff, TimeSpan choosenTime)
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
-            int idCustomer = (int)HttpContext.Session.GetInt32("id");
+            int idCredentials = (int)HttpContext.Session.GetInt32("id");
+            CustomerManager cManger = new CustomerManager(Configuration);
+            int idCustomer = cManger.GetCustomerIDByCredentials(idCredentials);
             AvailibilityManager aManager = new AvailibilityManager(Configuration);
 
             //Make deliveryBoy unavailable at the choosen time
