@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DTO.Availability>
+
+@{
+    ViewData["Title"] = "SelectTime";
+}
+
+<h2>SelectTime</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+            </td>
+            <td>
+                @Html.ActionLink("Choose This time", "ProceedCheckout","Cart", new {  idAvailability =item.idAvailability, idStaff=item.idStaff, choosenTime = item.time })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

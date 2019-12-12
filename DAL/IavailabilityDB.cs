@@ -8,10 +8,9 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-
-        Availability AddAvailability(Availability availability);
+        List<Availability> GetAvailabilitiesByRestaurant(int id);
         int DeleteAvailability(int id);
         Availability GetAvailability(int id);
-        int UpdateAvailability(Availability availability);
+        void UpdateAvailability(int id);
     }
 }

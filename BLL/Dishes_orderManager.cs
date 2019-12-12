@@ -23,9 +23,9 @@ namespace BLL
             return Dishes_orderDb.GetDishes_order(id);
         }
 
-        public Dishes_order AddDishes_order(Dishes_order dishes_order)
+        public void AddDishes_order(int idDishe, int idLastOrder, int quantity)
         {
-            return Dishes_orderDb.AddDishes_order(dishes_order);
+            
         }
 
         public int UpdateDishes_order(Dishes_order dishes_order)

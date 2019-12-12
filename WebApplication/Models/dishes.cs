@@ -25,6 +25,7 @@ namespace WebApplication.Models
         public string status { get; set; }
         public int idRestaurant { get; set; }
     
+
         public virtual ICollection<dishes_order> dishes_order { get; set; }
         public virtual restaurants restaurants { get; set; }
     }

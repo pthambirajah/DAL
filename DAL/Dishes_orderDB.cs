@@ -52,7 +52,7 @@ namespace DAL
             return dishes_order;
         }
 
-        public Dishes_order AddDishes_order(Dishes_order dishes_order)
+        public void AddDishes_order(int idDishe, int idLastOrder, int quantity)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -60,15 +60,15 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO dishes_order(idDishes, idDishes_Order, idOrder) VALUES(@idDishes, @idDishes_Order, @idOrder); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO dishes_order(idDishes, idOrder, quantity) VALUES(@idDishe, @idOrder, @quantity)";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idDishes", dishes_order.idDishes);
-                    cmd.Parameters.AddWithValue("@idDishes_Order", dishes_order.idDishes_Order);
-                    cmd.Parameters.AddWithValue("@idOrder", dishes_order.idOrder);
+                    cmd.Parameters.AddWithValue("@idDishe", idDishe);
+                    cmd.Parameters.AddWithValue("@idOrder", idLastOrder);
+                    cmd.Parameters.AddWithValue("@quantity", quantity);
 
                     cn.Open();
-
-                    dishes_order.idDishes_Order = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.ExecuteNonQuery();
+                    // dishes_order.idDishes_Order = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -76,7 +76,6 @@ namespace DAL
                 throw e;
             }
 
-            return dishes_order;
         }
 
         public int UpdateDishes_order(Dishes_order dishes_order)

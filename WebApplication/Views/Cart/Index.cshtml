@@ -43,10 +43,10 @@
                 <td class="text-center"><strong>@Html.Raw(ViewBag.totalAmount)</strong></td>
             </tr>
             <tr>
-                <td><a href="" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continue Shopping</a></td>
+                <td><a href="https://localhost:44399/" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>@Html.Raw(ViewBag.totalAmount)</strong></td>
-                <td><a href="https://www.paypal.com/webapps/hermes?token=5EY097812P7754247&useraction=commit&mfid=1546377013907_cf1dec6830d7" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                <td><a href="@Url.Action("SelectTime", "Cart")" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
             </tr>
         </tfoot>
     </table>

@@ -11,10 +11,12 @@ namespace BLL
 
         IDeliveryDB DeliveryDB { get; }
 
-        Delivery AddDelivery(Delivery delivery);
+        Delivery AddDelivery(TimeSpan choosenTime, int idStaff);
 
         Delivery UpdateDelivery(Delivery delivery);
 
         Delivery DeleteDelivery(int id);
+
+        int GetLastId();
     }
 }

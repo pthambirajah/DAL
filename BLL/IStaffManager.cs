@@ -13,7 +13,7 @@ namespace BLL
         Staff AddStaff(Staff staff);
         Staff GetStaff(int id);
 
-
+        int GetStaffId(int id);
         Staff UpdateStaff(Staff staff);
 
         Staff DeleteStaff(int id);

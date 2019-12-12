@@ -8,9 +8,10 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        Order AddOrder(Order order);
+        void AddOrder(int idCustomer, int idDelivery);
         int DeleteOrder(int id);
         Order GetOrder(int id);
+        int GetLastId();
         int UpdateOrder(Order order);
 
 

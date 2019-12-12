@@ -57,8 +57,6 @@ namespace WebApplication.Controllers
                 HttpContext.Session.SetInt32("TotalAmount", price );
             }
             
-
-
             if (SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
             {
                 List<Item> cart = new List<Item>();

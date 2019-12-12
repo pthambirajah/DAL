@@ -10,13 +10,12 @@ namespace BLL
     {
         IOrderDB OrderDB { get; }
 
-        Order AddOrder(Order order);
+        void AddOrder(int idCustomer, int idDelivery);
 
         Order UpdateOrder(Order order);
 
         Order DeleteOrder(int id);
 
-        Order UpdateOrderStatus(int id);
-
+        int GetLastId();
     }
 }

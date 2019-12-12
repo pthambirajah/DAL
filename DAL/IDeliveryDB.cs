@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using DTO;
+using System;
 
 namespace DAL
 {
@@ -8,9 +9,10 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        Delivery AddDelivery(Delivery delivery);
+        void AddDelivery(TimeSpan choosenTime, int idStaff);
         int DeleteDelivery (int id);
         Delivery GetDelivery(int id);
         int UpdateDelivery(Delivery delivery);
+        int GetLastId();
     }
 }

@@ -15,6 +15,40 @@ namespace DAL
             Configuration = configuration;
         }
 
+        public int GetStaffId(int id)
+        {
+            int idStaff = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT idStaff FROM staff WHERE FK_idCredentials = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+
+                            idStaff = (int)dr["idStaff"];
+                            
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return idStaff;
+        }
 
 
         public Staff GetStaff(int id)
