@@ -22,9 +22,14 @@ namespace BLL
             return DeliveryDb.GetDelivery(id);
         }
 
-        public Delivery AddDelivery(Delivery delivery)
+        public int GetLastId()
         {
-            return DeliveryDb.AddDelivery(delivery);
+            return DeliveryDb.GetLastId();
+        }
+
+        public void AddDelivery(TimeSpan choosenTime, int idStaff)
+        {
+         
         }
 
         public int UpdateDelivery(Delivery delivery)

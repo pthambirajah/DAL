@@ -15,7 +15,6 @@ namespace DAL
             Configuration = configuration;
         }
 
-
         public Order GetOrder(int id)
         {
             Order order = null;
@@ -56,24 +55,27 @@ namespace DAL
             return order;
         }
 
-        public Order AddOrder(Order order)
+        public int GetLastId()
         {
+            int lastOrder = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO commande(status, createdAt, idCustomer, idDelivery) VALUES(@status, @createdAt, @idCustomer, @idDelivery); SELECT SCOPE_IDENTITY()";
+                    string query = "SELECT idOrder FROM commande WHERE idOrder = (SELECT max(idOrder) FROM commande)";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@createdAt", order.createdAt);
-                    cmd.Parameters.AddWithValue("@idCustomer", order.idCustomer);
-                    cmd.Parameters.AddWithValue("@idDelivery", order.idDelivery);
 
                     cn.Open();
 
-                    order.idOrder = Convert.ToInt32(cmd.ExecuteScalar());
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            lastOrder = (int)dr["idOrder"];
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -81,7 +83,34 @@ namespace DAL
                 throw e;
             }
 
-            return order;
+            return lastOrder;
+        }
+
+        public void AddOrder(int idCustomer, int idDelivery)
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "INSERT INTO commande (status, createdAt, idCustomer, idDelivery) VALUES('waiting', CAST(CONVERT(TIME(0),GETDATE()) AS VARCHAR(15)), @idCustomer, @idDelivery)";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@status", idCustomer);
+                    cmd.Parameters.AddWithValue("@createdAt", idDelivery);
+                   
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    //order.idOrder = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+           
         }
 
         public int UpdateOrder(Order order)

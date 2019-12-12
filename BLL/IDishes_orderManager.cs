@@ -10,7 +10,7 @@ namespace BLL
     {
         IDishes_orderDB Dishes_orderDB { get; }
 
-        Dishes_order AddDishes_order(Dishes_order dishes_order);
+        void AddDishes_order(int idDishe, int idLastOrder, int quantity);
 
         Dishes_order UpdateDishes_order(Dishes_order dishes_order);
 

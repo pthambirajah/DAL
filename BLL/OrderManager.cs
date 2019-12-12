@@ -23,9 +23,14 @@ namespace BLL
             return OrderDb.GetOrder(id);
         }
 
-        public Order AddOrder(Order order)
+        public int GetLastId()
         {
-            return OrderDb.AddOrder(order);
+            return OrderDb.GetLastId();
+        }
+
+        public void AddOrder(int idCustomer, int idDelivery)
+        {
+           
         }
 
         public int UpdateOrder(Order order)

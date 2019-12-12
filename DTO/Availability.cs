@@ -10,10 +10,9 @@ namespace DTO
         
         public Boolean isAvailable { get; set; }
 
-        public DateTime time { get; set; }
+        public TimeSpan time { get; set; }
 
         public int idStaff { get; set; }
-
 
     }
 }

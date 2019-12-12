@@ -8,7 +8,7 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
 
-        Dishes_order AddDishes_order(Dishes_order dishes_order);
+        void AddDishes_order(int idDishe, int idLastOrder, int quantity);
         int DeleteDishes_order(int id);
         Dishes_order GetDishes_order(int id);
         int UpdateDishes_order(Dishes_order dishes_order);

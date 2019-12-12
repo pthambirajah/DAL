@@ -34,14 +34,15 @@ namespace WebApplication.Controllers
             var credentialsDbManager = new CredentialsManager(Configuration);
             int idCustomerTryingToConnect = credentialsDbManager.GetIdCredentials(usernameC);
 
-            //En fonction de l'id du customer - Alex Piguet Pute
+            //En fonction de l'id du customer
             //while (passwordC != credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             if (passwordC == credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             {
                 HttpContext.Session.SetString("username", usernameC);
+                HttpContext.Session.SetInt32("id", idCustomerTryingToConnect);
                 if (credentialsDbManager.isAdmin(usernameC))
                 {
-                    return RedirectToAction("Index", "DishesOrder", new { id = 2 });
+                    return RedirectToAction("Index", "DishesOrder", new { id = 1 });
                 }
                 return RedirectToAction("Index", "Home");
             }

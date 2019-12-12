@@ -21,15 +21,15 @@ namespace BLL
             return AvailibilityDb.GetAvailability(id);
         }
 
-        public Availability AddAvailibility(Availability availibility)
+        public List<Availability> GetAvailabilitiesByRestaurant(int id)
         {
-            return AvailibilityDb.AddAvailability(availibility);
+            return AvailibilityDb.GetAvailabilitiesByRestaurant(id);
         }
+     
 
-        public int UpdateAvailability(Availability availibility)
+        public void UpdateAvailability(int id)
         {
-            return AvailibilityDb.UpdateAvailability(availibility);
-
+           
         }
 
         public int DeleteAvailability(int id)

@@ -39,7 +39,7 @@ namespace DAL
 
                             availability.idAvailability = (int)dr["idAvailability"];
                             availability.isAvailable = (Boolean)dr["isAvailable"];
-                            availability.time = (DateTime)dr["time"];
+                            availability.time = (TimeSpan)dr["time"];
                             availability.idStaff = (int)dr["idStaff"];
                             
                         }
@@ -54,25 +54,37 @@ namespace DAL
             return availability;
         }
 
-        public Availability AddAvailability(Availability availability)
+        public List<Availability> GetAvailabilitiesByRestaurant(int id)
         {
+            
+            List<Availability> availability = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO availability(idAvailability, isAvailable, time, idStaff) VALUES(@idAvailability, @isAvailable, @time, @idStaff); SELECT SCOPE_IDENTITY()";
+                    string query = "SELECT DISTINCT idAvailability, time, a.idStaff FROM availibility a INNER JOIN staff s ON a.idStaff = s.idStaff INNER JOIN restaurants r ON s.FK_iDCity = r.idCity WHERE r.idCity = @id and isAvailable = 1";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idAvailability", availability.idAvailability);
-                    cmd.Parameters.AddWithValue("@isAvailable", availability.isAvailable);
-                    cmd.Parameters.AddWithValue("@time", availability.time);
-                    cmd.Parameters.AddWithValue("@idStaff", availability.idStaff);
-
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 
-                    availability.idAvailability = Convert.ToInt32(cmd.ExecuteScalar());
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (availability == null)
+                                availability = new List<Availability>();
+
+                            Availability available = new Availability();
+
+                            available.time = (TimeSpan)dr["time"];
+                            available.idStaff = (int)dr["idStaff"];
+
+                            availability.Add(available);
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -83,33 +95,28 @@ namespace DAL
             return availability;
         }
 
-        public int UpdateAvailability(Availability availability)
+        public void UpdateAvailability(int id)
         {
-            int result = 0;
+           // int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE availability SET idAvailability=@idAvailability, isAvailable=@isAvailable, time=@time, idStaff=@idStaff WHERE idAvailability=@idAvailability";
+                    string query = "UPDATE availability SET isAvailable=0 WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idAvailability", availability.idAvailability);
-                    cmd.Parameters.AddWithValue("@isAvailable", availability.isAvailable);
-                    cmd.Parameters.AddWithValue("@time", availability.time);
-                    cmd.Parameters.AddWithValue("@idStaff", availability.idStaff);
-
+                    cmd.Parameters.AddWithValue("@idAvailability", id);
+             
                     cn.Open();
 
-                    result = cmd.ExecuteNonQuery();
+                   //result = cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-
-            return result;
         }
 
         public int DeleteAvailability(int id)

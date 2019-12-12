@@ -10,9 +10,11 @@ namespace BLL
     {
         IAvailabilityDB AvailabilityDB { get; }
 
+        List<Availability> GetAvailabilitiesByRestaurant(int id);
+
         Availability AddAvailibility(Availability availibility);
 
-        Availability UpdateAvailability(Availability availibility);
+        Availability UpdateAvailability(int id);
 
         Availability DeleteAvailability(int id);
     }
