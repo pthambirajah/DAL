@@ -49,9 +49,9 @@ namespace WebApplication.Controllers
                else if (credentialsDbManager.isStaff(usernameC))
                 {
 
-                int id2 = retrievedIdStaff;
-
-                    return RedirectToAction("Index", "DishesOrder", new { id = retrievedIdStaff });
+                    StaffManager sManager = new StaffManager(Configuration);
+                    int idStaff = sManager.GetStaffId(retrievedIdStaff);
+                    return RedirectToAction("Index", "DishesOrder", new { id = idStaff });
 
                 }
 

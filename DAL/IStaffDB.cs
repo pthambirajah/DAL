@@ -13,6 +13,8 @@ namespace DAL
         Staff AddStaff(Staff staff);
         int DeleteStaff(int id);
         Staff GetStaff(int id);
+
+        int GetStaffId(int id);
         int UpdateStaff(Staff staff);
     }
 

@@ -16,6 +16,11 @@ namespace BLL
             StaffDb = new StaffDB(configuration);
         }
 
+        public int GetStaffId(int id)
+        {
+            return StaffDb.GetStaffId(id);
+        }
+
         public Staff GetStaff(int id)
         {
             return StaffDb.GetStaff(id);
