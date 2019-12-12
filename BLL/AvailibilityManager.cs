@@ -29,7 +29,7 @@ namespace BLL
 
         public void UpdateAvailability(int id)
         {
-           
+            AvailibilityDb.UpdateAvailability(id);
         }
 
         public int DeleteAvailability(int id)

@@ -29,7 +29,7 @@ namespace BLL
 
         public void AddDelivery(TimeSpan choosenTime, int idStaff)
         {
-         
+            DeliveryDb.AddDelivery(choosenTime, idStaff);
         }
 
         public int UpdateDelivery(Delivery delivery)
