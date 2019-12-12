@@ -43,7 +43,7 @@ namespace WebApplication.Controllers
                 HttpContext.Session.SetInt32("id", idCustomerTryingToConnect);
                 if (credentialsDbManager.isAdmin(usernameC))
                 {
-                    return RedirectToAction("Index", "DishesOrder", new { id = 1 });
+                    return RedirectToAction("Index", "DishesOrder");
                 }
 
                else if (credentialsDbManager.isStaff(usernameC))
@@ -51,7 +51,8 @@ namespace WebApplication.Controllers
 
                     StaffManager sManager = new StaffManager(Configuration);
                     int idStaff = sManager.GetStaffId(retrievedIdStaff);
-                    return RedirectToAction("Index", "DishesOrder", new { id = idStaff });
+                    HttpContext.Session.SetInt32("idStaff", idStaff);
+                    return RedirectToAction("Index", "DishesOrder");
 
                 }
 

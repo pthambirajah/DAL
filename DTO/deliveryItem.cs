@@ -21,7 +21,9 @@ namespace DTO
 
         public int Quantity { get; set; }
 
-        public int idStaff { get; set; }
+        public int idOrder { get; set; }
+
+        public string status { get; set; }
 
     }
 }

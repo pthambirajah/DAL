@@ -18,31 +18,24 @@ namespace WebApplication.Controllers
             Configuration = configuration;
         }
 
-        [HttpGet]
-        public IActionResult Index(int idC)
+       
+        public IActionResult Index()
         {
             int id = (int) HttpContext.Session.GetInt32("idStaff");
             ViewBag.username = HttpContext.Session.GetString("username");
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
-
-            if (idC == 1)
-            {
-                dManager.UpdateOrderStatus(id);
-
-            }
             return View(dManager.GetDishes_orderByStaff(id));
         }
 
-        [HttpPost]
-        public IActionResult UpdateOrderStatus ()
+        
+        public IActionResult UpdateOrderStatus (int idOrder)
         {
             int id = (int)HttpContext.Session.GetInt32("idStaff");
+
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
-            dManager.UpdateOrderStatus(id);
+            dManager.UpdateOrderStatus(idOrder);
 
-            //a loop coming back to your list with param id
-            return RedirectToAction("Index", "DishesOrder"); 
-
+            return View(dManager.GetDishes_orderByStaff(id));
         }
     }
 }
