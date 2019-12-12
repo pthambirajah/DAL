@@ -15,5 +15,8 @@ namespace BLL
         Order UpdateOrder(Order order);
 
         Order DeleteOrder(int id);
+
+        Order UpdateOrderStatus(int id);
+
     }
 }

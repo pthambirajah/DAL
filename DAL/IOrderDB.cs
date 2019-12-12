@@ -12,5 +12,7 @@ namespace DAL
         int DeleteOrder(int id);
         Order GetOrder(int id);
         int UpdateOrder(Order order);
+
+
     }
 }

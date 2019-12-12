@@ -146,7 +146,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime, d.quantity  FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id";
+                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime, d.quantity, delivery.idStaff  FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -169,7 +169,7 @@ namespace DAL
                             deliveryItem.idCity = (int)dr["idCity"];
                             deliveryItem.deliveryTime = (TimeSpan)dr["deliveryTime"];
                             deliveryItem.Quantity = (int)dr["quantity"];
-                            
+                            deliveryItem.idStaff = (int)dr["idStaff"];
                             deliveryBundle.Add(deliveryItem);
                         }
                     }
@@ -181,6 +181,33 @@ namespace DAL
             }
 
             return deliveryBundle;
+        }
+
+        public int UpdateOrderStatus(int id)
+        {
+
+            int result = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE R SET R.status = 'delivered' FROM dbo.commande AS R INNER JOIN dbo.dishes_order AS P ON R.idOrder= P.idOrder WHERE R.idOrder = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    result = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
         }
     }
 }

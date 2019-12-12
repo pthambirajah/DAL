@@ -22,6 +22,7 @@ namespace WebApplication.Controllers
         {
             ViewBag.username = HttpContext.Session.GetString("username");
             DishesManager dManager = new DishesManager(Configuration);
+
             return View(dManager.GetDishes());
         }
 

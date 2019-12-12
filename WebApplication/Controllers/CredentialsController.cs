@@ -48,9 +48,9 @@ namespace WebApplication.Controllers
                else if (credentialsDbManager.isStaff(usernameC))
                 {
 
-                int id2 = retrievedIdStaff;
+                    HttpContext.Session.SetInt32("idStaff", retrievedIdStaff);
 
-                    return RedirectToAction("Index", "DishesOrder", new { id = retrievedIdStaff });
+                    return RedirectToAction("Index", "DishesOrder", new { idC = 0});
 
                 }
 
