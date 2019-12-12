@@ -19,6 +19,8 @@ namespace BLL
         Credentials GetPassword(int idCredentials, string username);
 
         Credentials isAdmin(string username);
+        Credentials isStaff(string username);
+        Credentials GetIdStaff(string username);
 
     }
 }
