@@ -44,5 +44,10 @@ namespace BLL
             return Dishes_orderDb.GetDishes_orderByStaff(id);        
         }
 
+        public int UpdateOrderStatus(int id)
+        {
+            return Dishes_orderDb.UpdateOrderStatus(id);
+
+        }
     }
 }

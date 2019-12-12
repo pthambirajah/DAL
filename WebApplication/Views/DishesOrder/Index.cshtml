@@ -16,6 +16,9 @@
             <th>@Html.DisplayNameFor(model => model.address)</th>
             <th>@Html.DisplayNameFor(model => model.idCity)</th>
             <th>@Html.DisplayNameFor(model => model.deliveryTime)</th>
+            <!-- might not work by Alex -->
+            <!--<th>Html.DisplayNameFor(model => model.idStaff)</th>-->
+
         </tr>
     </thead>
     <tbody>
@@ -43,10 +46,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.deliveryTime)
             </td>
+
+
+
             <td>
                 @Html.ActionLink("Cancelled", "Cancelled", new { /* id=item.PrimaryKey */ }) |
-                <!--Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
+                
+                <!--Might not work, by alex lol-->
+                @Html.ActionLink("Archive", "Index", new { idC = 1 })
+                <!--Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
             </td>
         </tr>
         }
