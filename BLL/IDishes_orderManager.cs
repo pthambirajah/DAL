@@ -18,5 +18,6 @@ namespace BLL
 
         List<deliveryItem> GetDishes_orderByCustomer(int id);
         void UpdateOrderStatus(int id);
+        void UpdateOrderStatusToCancel(int id);
     }
 }

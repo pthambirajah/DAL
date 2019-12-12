@@ -45,5 +45,12 @@ namespace WebApplication.Controllers
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
             return View(dManager.GetDishes_orderByCustomer(id));
         }
+
+        public IActionResult cancel(int idOrder)
+        {
+            Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
+            dManager.UpdateOrderStatusToCancel(idOrder);
+            return RedirectToAction("customerOrders");
+        }
     }
 }

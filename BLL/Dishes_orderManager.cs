@@ -51,5 +51,10 @@ namespace BLL
         {
             Dishes_orderDb.UpdateOrderStatus(id);
         }
+
+        public void UpdateOrderStatusToCancel(int id)
+        {
+            Dishes_orderDb.UpdateOrderStatusToCancel(id);
+        }
     }
 }
