@@ -51,6 +51,7 @@ namespace WebApplication.Controllers
 
                     StaffManager sManager = new StaffManager(Configuration);
                     int idStaff = sManager.GetStaffId(retrievedIdStaff);
+                
                     return RedirectToAction("Index", "DishesOrder", new { id = idStaff });
 
                 }
