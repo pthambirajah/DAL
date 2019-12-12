@@ -78,7 +78,7 @@ namespace DAL
                                 availability = new List<Availability>();
 
                             Availability available = new Availability();
-
+                            available.idAvailability = (int)dr["idAvailability"];
                             available.time = (TimeSpan)dr["time"];
                             available.idStaff = (int)dr["idStaff"];
 
@@ -104,13 +104,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE availability SET isAvailable=0 WHERE idAvailability=@idAvailability";
+                    string query = "UPDATE availibility SET isAvailable = 0 WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idAvailability", id);
              
                     cn.Open();
 
-                   //result = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)

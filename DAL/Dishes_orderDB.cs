@@ -184,6 +184,51 @@ namespace DAL
             return deliveryBundle;
         }
 
+        public List<deliveryItem> GetDishes_orderByCustomer(int id)
+        {
+            List<deliveryItem> deliveryBundle = null;
+           
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT m.name, delivery.deliveryTime, d.quantity, o.idOrder, o.status FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE o.idCustomer = @id ORDER BY o.idOrder";
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (deliveryBundle == null)
+                                deliveryBundle = new List<deliveryItem>();
+
+                            deliveryItem deliveryItem = new deliveryItem();
+
+                            deliveryItem.dishesname = (string)dr["name"];
+                            deliveryItem.deliveryTime = (TimeSpan)dr["deliveryTime"];
+                            deliveryItem.Quantity = (int)dr["quantity"];
+                            deliveryItem.idOrder = (int)dr["idOrder"];
+                            deliveryItem.status = (string)dr["status"];
+
+                            deliveryBundle.Add(deliveryItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return deliveryBundle;
+        }
+
         public void UpdateOrderStatus(int id)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

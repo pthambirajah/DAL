@@ -14,7 +14,7 @@ namespace BLL
 
         Availability AddAvailibility(Availability availibility);
 
-        Availability UpdateAvailability(int id);
+        void UpdateAvailability(int id);
 
         Availability DeleteAvailability(int id);
     }

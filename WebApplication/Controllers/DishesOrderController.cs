@@ -37,5 +37,13 @@ namespace WebApplication.Controllers
 
             return View(dManager.GetDishes_orderByStaff(id));
         }
+
+        public IActionResult customerOrders()
+        {
+            int id = (int)HttpContext.Session.GetInt32("idCustomer");
+            ViewBag.username = HttpContext.Session.GetString("username");
+            Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
+            return View(dManager.GetDishes_orderByCustomer(id));
+        }
     }
 }

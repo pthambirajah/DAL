@@ -39,7 +39,7 @@ namespace WebApplication.Controllers
         }
 
         
-        public IActionResult ProceedCheckout(int idAvailability, int idStaff, TimeSpan choosenTime)
+        public IActionResult ProceedCheckout(int id, int idStaff, TimeSpan choosenTime)
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
             int idCredentials = (int)HttpContext.Session.GetInt32("id");
@@ -48,7 +48,7 @@ namespace WebApplication.Controllers
             AvailibilityManager aManager = new AvailibilityManager(Configuration);
 
             //Make deliveryBoy unavailable at the choosen time
-            aManager.UpdateAvailability(idAvailability);
+            aManager.UpdateAvailability(id);
 
             DeliveryManager dManager = new DeliveryManager(Configuration);
             dManager.AddDelivery(choosenTime, idStaff);
@@ -67,6 +67,10 @@ namespace WebApplication.Controllers
                 doManager.AddDishes_order(dish.Dishe.idDishes, lastOrder, dish.Quantity);
             }
 
+            cart = null;
+            //Clean up cart
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            HttpContext.Session.SetInt32("TotalAmount", 0);
             return View();
         }
     }

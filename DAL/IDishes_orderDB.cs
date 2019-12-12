@@ -13,6 +13,8 @@ namespace DAL
         Dishes_order GetDishes_order(int id);
         int UpdateDishes_order(Dishes_order dishes_order);
         List<deliveryItem> GetDishes_orderByStaff(int id);
+
+        List<deliveryItem> GetDishes_orderByCustomer(int id);
         void UpdateOrderStatus(int id);
 
     }

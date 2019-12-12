@@ -17,7 +17,10 @@ namespace BLL
             Dishes_orderDb = new Dishes_orderDB(configuration);
         }
 
-
+        public List<deliveryItem> GetDishes_orderByCustomer(int id)
+        {
+            return Dishes_orderDb.GetDishes_orderByCustomer(id);
+        }
         public Dishes_order GetDishes_order(int id)
         {
             return Dishes_orderDb.GetDishes_order(id);

@@ -33,10 +33,8 @@ namespace WebApplication.Controllers
 
             var credentialsDbManager = new CredentialsManager(Configuration);
             int idCustomerTryingToConnect = credentialsDbManager.GetIdCredentials(usernameC);
-            int retrievedIdStaff = credentialsDbManager.GetIdCredentials(usernameC);
 
             //En fonction de l'id du customer
-            //while (passwordC != credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             if (passwordC == credentialsDbManager.GetPassword(idCustomerTryingToConnect, usernameC))
             {
                 HttpContext.Session.SetString("username", usernameC);
@@ -50,12 +48,13 @@ namespace WebApplication.Controllers
                 {
 
                     StaffManager sManager = new StaffManager(Configuration);
-                    int idStaff = sManager.GetStaffId(retrievedIdStaff);
+                    int idStaff = sManager.GetStaffId(idCustomerTryingToConnect);
                     HttpContext.Session.SetInt32("idStaff", idStaff);
                     return RedirectToAction("Index", "DishesOrder");
 
                 }
-
+                CustomerManager cManager = new CustomerManager(Configuration);
+                HttpContext.Session.SetInt32("idCustomer", cManager.GetCustomerIDByCredentials(idCustomerTryingToConnect));
                 return RedirectToAction("Index", "Home");
             }
             else

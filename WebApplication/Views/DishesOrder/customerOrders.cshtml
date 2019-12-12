@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DTO.deliveryItem>
+
+@{
+    ViewData["Title"] = "customerOrders";
+}
+
+<h2>customerOrders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dishesname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.deliveryTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dishesname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deliveryTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.ActionLink("Cancel", "Cancel", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

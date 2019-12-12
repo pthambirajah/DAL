@@ -9,10 +9,23 @@ namespace WebApplication.Models
     public class deliveryItem
     {
 
-        public Dishes Dishe { get; set; }
-        public Customer Customer { get; set; }
+        public string dishesname { get; set; }
 
-        public Delivery Delivery { get; set; }
+        public string firstname { get; set; }
+
+        public string lastname { get; set; }
+
+        public string address { get; set; }
+
+        public int idCity { get; set; }
+
+        public TimeSpan deliveryTime { get; set; }
+
+        public int Quantity { get; set; }
+
+        public int idOrder { get; set; }
+
+        public string status { get; set; }
 
     }
 }
