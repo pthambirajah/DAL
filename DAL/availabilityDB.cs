@@ -64,7 +64,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT DISTINCT idAvailability, time, a.idStaff FROM availibility a INNER JOIN staff s ON a.idStaff = s.idStaff INNER JOIN restaurants r ON s.FK_iDCity = r.idCity WHERE r.idCity = @id and isAvailable = 1";
+                    string query = "SELECT DISTINCT idAvailability, time, a.idStaff FROM availibility a INNER JOIN staff s ON a.idStaff = s.idStaff INNER JOIN restaurants r ON s.FK_iDCity = r.idCity WHERE r.idRestaurant = @id and isAvailable = 1 and s.FK_iDCity = r.idCity";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

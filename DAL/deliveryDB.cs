@@ -92,7 +92,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "INSERT INTO delivery (deliveryTime, idStaff, deliveryDate) VALUES(@deliveryTime, @idStaff, CAST(CONVERT(TIME(0),GETDATE()) AS VARCHAR(15))";
+                        string query = "INSERT INTO delivery (deliveryTime, idStaff, deliveryDate) VALUES(@deliveryTime, @idStaff, CAST(CONVERT(TIME(0),GETDATE()) AS VARCHAR(15)))";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@deliveryTime", choosenTime);
                         cmd.Parameters.AddWithValue("@idStaff", idStaff);

@@ -25,7 +25,7 @@ namespace BLL
 
         public void AddDishes_order(int idDishe, int idLastOrder, int quantity)
         {
-            
+            Dishes_orderDb.AddDishes_order(idDishe, idLastOrder, quantity);
         }
 
         public int UpdateDishes_order(Dishes_order dishes_order)

@@ -30,7 +30,7 @@ namespace BLL
 
         public void AddOrder(int idCustomer, int idDelivery)
         {
-           
+            OrderDb.AddOrder(idCustomer, idDelivery);
         }
 
         public int UpdateOrder(Order order)

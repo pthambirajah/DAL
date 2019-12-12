@@ -96,8 +96,8 @@ namespace DAL
                 {
                     string query = "INSERT INTO commande (status, createdAt, idCustomer, idDelivery) VALUES('waiting', CAST(CONVERT(TIME(0),GETDATE()) AS VARCHAR(15)), @idCustomer, @idDelivery)";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@status", idCustomer);
-                    cmd.Parameters.AddWithValue("@createdAt", idDelivery);
+                    cmd.Parameters.AddWithValue("@idCustomer", idCustomer);
+                    cmd.Parameters.AddWithValue("@idDelivery", idDelivery);
                    
 
                     cn.Open();
