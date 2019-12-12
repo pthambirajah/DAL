@@ -63,9 +63,9 @@ namespace DAL
                     {
                         string query = "INSERT INTO delivery (idDelivery, deliveryTime, idStaff) VALUES(@idDelivery, @deliveryTime, @idStaff); SELECT SCOPE_IDENTITY()";
                         SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@idDishes", delivery.idDelivery);
-                        cmd.Parameters.AddWithValue("@idDishes_Order", delivery.deliveryTime);
-                        cmd.Parameters.AddWithValue("@idOrder", delivery.idStaff);
+                        cmd.Parameters.AddWithValue("@idDelivery", delivery.idDelivery);
+                        cmd.Parameters.AddWithValue("@deliveryTime", delivery.deliveryTime);
+                        cmd.Parameters.AddWithValue("@idStaff", delivery.idStaff);
 
                         cn.Open();
 

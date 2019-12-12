@@ -32,6 +32,11 @@ namespace BLL
             return DishesDb.GetDishe(id);
         }
 
+        public int GetDishePrice(int id)
+        {
+            return DishesDb.GetDishePrice(id);
+        }
+
         public Dishes AddDishes(Dishes dishes)
         {
             return DishesDb.AddDishes(dishes);

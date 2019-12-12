@@ -13,6 +13,8 @@ namespace BLL
 
         List<Dishes> GetDishesOfRestaurant(int id);
 
+        int GetDishePrice(int id);
+
         Dishes AddDishes(Dishes dishes);
 
         Dishes UpdateDishes(Dishes dishes);
