@@ -27,23 +27,6 @@ namespace BLL
             return CredentialsDb.AddCredentials(credentials);
         }
 
-        public int UpdateCredentials(Credentials credentials)
-        {
-            return CredentialsDb.UpdateCredentials(credentials);
-
-        }
-
-        public int DeleteCredentials(int id)
-        {
-            return CredentialsDb.DeleteCredentials(id);
-        }
-
-        /*
-        public int GetIdCustomer(string usernameC)
-        {
-            throw new NotImplementedException();
-        }
-        */
         public int GetIdCredentials(string username)
         {
             return CredentialsDb.GetIdCredentials(username);

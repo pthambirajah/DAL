@@ -24,20 +24,5 @@ namespace BLL
             return CitiesDb.GetCity(id);
         }
 
-        public Cities AddCities(Cities cities)
-        {
-            return CitiesDb.AddCities(cities);
-        }
-
-        public int UpdateCities(Cities cities)
-        {
-            return CitiesDb.UpdateCities(cities);
-
-        }
-
-        public int DeleteCities(int id)
-        {
-            return CitiesDb.DeleteCities(id);
-        }
     }
 }

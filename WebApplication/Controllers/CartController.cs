@@ -39,7 +39,7 @@ namespace WebApplication.Controllers
         }
 
         
-        public IActionResult ProceedCheckout(int id, int idStaff, TimeSpan choosenTime)
+        public IActionResult ProceedCheckout(int idAvailability, int idStaff, TimeSpan choosenTime)
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
             int idCredentials = (int)HttpContext.Session.GetInt32("id");
@@ -49,47 +49,51 @@ namespace WebApplication.Controllers
 
             int entriesleft=0;
 
-            if (id <= 15)
-                entriesleft = 15 - id;
-            else if (id <= 30)
-                entriesleft = 30 - id;
-            else if (id <= 45)
-                entriesleft = 45 - id;
+            /*if (idAvailability <= 15)
+                entriesleft = 15 - idAvailability;
+            else if (idAvailability <= 30)
+                entriesleft = 30 - idAvailability;
+            else if (idAvailability <= 45)
+                entriesleft = 45 - idAvailability;
+*/
 
-
-            if (entriesleft >= 2)
+            //if (entriesleft >= 2)
+            if (idAvailability % 15 < 14)
             {
                 //additioning the counter of the cur. time + cur. time + 15 + cur. time + 30
-                int totalCounter = aManager.GetCounter(id) + aManager.GetCounter(id + 1) + aManager.GetCounter(id + 2);
+                int totalCounter = aManager.GetCounter(idAvailability) + aManager.GetCounter(idAvailability + 1) + aManager.GetCounter(idAvailability + 2);
 
-                if (totalCounter > 5)
+                if (totalCounter >= 5)
                     //Make deliveryBoy unavailable at the choosen time
-                    aManager.UpdateAvailability(id);
+                    aManager.UpdateAvailability(idAvailability);
 
-                for (int i = id; i <= id + 2; i++)
+                for (int i = idAvailability; i <= idAvailability + 2; i++)
                     //increment counter
                     aManager.IncrementCounter(i);
             }
-            else if (entriesleft == 1)
+            else if (idAvailability % 15 == 14)
+            //if (entriesleft == 14)
             {
-                int totalCounter = aManager.GetCounter(id) + aManager.GetCounter(id + 1);
+                int totalCounter = aManager.GetCounter(idAvailability) + aManager.GetCounter(idAvailability + 1);
 
-                if (totalCounter > 5)
+                if (totalCounter >= 5)
                     //Make deliveryBoy unavailable at the choosen time
-                    aManager.UpdateAvailability(id);
+                    aManager.UpdateAvailability(idAvailability);
 
-                for (int i = id; i <= id + 1; i++)
+                for (int i = idAvailability; i <= idAvailability + 1; i++)
                     //increment counter
                     aManager.IncrementCounter(i);
             }
-            else if (entriesleft == 0) {
-                int totalCounter = aManager.GetCounter(id);
+            else if (idAvailability % 15 == 0)
+            { 
+               // if (entriesleft == 0) {
+                int totalCounter = aManager.GetCounter(idAvailability);
 
-                if (totalCounter > 5)
+                if (totalCounter >= 5)
                     //Make deliveryBoy unavailable at the choosen time
-                    aManager.UpdateAvailability(id);
+                    aManager.UpdateAvailability(idAvailability);
                 
-                aManager.IncrementCounter(id);
+                aManager.IncrementCounter(idAvailability);
             }
         
             DeliveryManager dManager = new DeliveryManager(Configuration);

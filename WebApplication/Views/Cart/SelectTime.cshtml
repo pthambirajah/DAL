@@ -25,7 +25,7 @@
                 @Html.DisplayFor(modelItem => item.time)
             </td>
             <td>
-                @Html.ActionLink("Choose This time", "ProceedCheckout","Cart", new { id=item.idAvailability, idStaff=item.idStaff, choosenTime = item.time })
+                @Html.ActionLink("Choose This time", "ProceedCheckout","Cart", new { idAvailability=item.idAvailability, idStaff=item.idStaff, choosenTime = item.time })
             </td>
         </tr>
 }

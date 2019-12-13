@@ -16,11 +16,6 @@ namespace BLL
         }
 
 
-        public Availability GetAvailibility(int id)
-        {
-            return AvailibilityDb.GetAvailability(id);
-        }
-
         public List<Availability> GetAvailabilitiesByRestaurant(int id)
         {
             return AvailibilityDb.GetAvailabilitiesByRestaurant(id);
@@ -32,10 +27,6 @@ namespace BLL
             AvailibilityDb.UpdateAvailability(id);
         }
 
-        public int DeleteAvailability(int id)
-        {
-            return AvailibilityDb.DeleteAvailability(id);
-        }
 
         public void IncrementCounter(int id)
         {
@@ -45,7 +36,6 @@ namespace BLL
         {
             return AvailibilityDb.GetCounter(id);
         }
-
 
     }
 }

@@ -21,25 +21,11 @@ namespace BLL
         {
             return Dishes_orderDb.GetDishes_orderByCustomer(id);
         }
-        public Dishes_order GetDishes_order(int id)
-        {
-            return Dishes_orderDb.GetDishes_order(id);
-        }
+       
 
         public void AddDishes_order(int idDishe, int idLastOrder, int quantity)
         {
             Dishes_orderDb.AddDishes_order(idDishe, idLastOrder, quantity);
-        }
-
-        public int UpdateDishes_order(Dishes_order dishes_order)
-        {
-            return Dishes_orderDb.UpdateDishes_order(dishes_order);
-
-        }
-
-        public int DeleteDishes_order(int id)
-        {
-            return Dishes_orderDb.DeleteDishes_order(id);
         }
 
         public List<deliveryItem> GetDishes_orderByStaff(int id)

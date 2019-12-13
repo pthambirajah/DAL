@@ -13,9 +13,6 @@ namespace BLL
 
         Delivery AddDelivery(TimeSpan choosenTime, int idStaff);
 
-        Delivery UpdateDelivery(Delivery delivery);
-
-        Delivery DeleteDelivery(int id);
 
         int GetLastId();
     }

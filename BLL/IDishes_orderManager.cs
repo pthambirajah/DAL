@@ -12,8 +12,6 @@ namespace BLL
 
         Dishes_order AddDishes_order(Dishes_order dishes_order);
 
-        Dishes_order UpdateDishes_order(Dishes_order dishes_order);
-        Dishes_order DeleteDishes_order(int id);
         List<deliveryItem> GetDishes_orderByStaff(int id);
 
         List<deliveryItem> GetDishes_orderByCustomer(int id);

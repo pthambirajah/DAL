@@ -15,7 +15,6 @@ namespace DAL
             Configuration = configuration;
         }
 
-
         public Credentials GetCredentials(int id)
         {
             Credentials credentials = null;
@@ -81,61 +80,7 @@ namespace DAL
             return credentials;
         }
 
-        public int UpdateCredentials(Credentials credentials)
-        {
-            int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "UPDATE credentials SET idCredentials=@idCredentials, username=@username, password=@password WHERE idCredentials=@idCredentials";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCredentials", credentials.idCredentials);
-                    cmd.Parameters.AddWithValue("@username", credentials.username);
-                    cmd.Parameters.AddWithValue("@password", credentials.password);
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-        public int DeleteCredentials(int id)
-        {
-            int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM credentials WHERE idCredentials=@idCredentials";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCredentials", id);
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-
+               
         //GET ID CREDENTIALS EN FONCTION D'UN USERNAME
         public int GetIdCredentials(string username)
         {

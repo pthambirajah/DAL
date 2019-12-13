@@ -37,21 +37,5 @@ namespace BLL
             return DishesDb.GetDishePrice(id);
         }
 
-        public Dishes AddDishes(Dishes dishes)
-        {
-            return DishesDb.AddDishes(dishes);
-        }
-
-        public int UpdateDishes(Dishes dishes)
-        {
-            return DishesDb.UpdateDishes(dishes);
-
-        }
-
-        public int DeleteDishes(int id)
-        {
-            return DishesDb.DeleteDishes(id);
-        }
-
     }
 }

@@ -9,8 +9,8 @@ namespace DAL
         IConfiguration Configuration { get; }
         int GetCustomerIDByCredentials(int id);
         Customer AddCustomer(Customer customer);
-        int DeleteCustomer (int id);
+
         Customer GetCustomer (int id);
-        int UpdateCustomer(Customer customer);
+
     }
 }

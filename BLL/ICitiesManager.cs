@@ -10,9 +10,7 @@ namespace BLL
     {
         ICitiesDB CitiesDB { get; }
 
-        Cities AddCities(Cities cities);
-        Cities UpdateCities(Cities cities);
         List<Cities> GetCities();
-        Cities DeleteCities(int id);
+    
     }
 }
