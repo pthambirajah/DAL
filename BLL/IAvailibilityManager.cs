@@ -17,5 +17,8 @@ namespace BLL
         void UpdateAvailability(int id);
 
         Availability DeleteAvailability(int id);
+
+        void IncrementCounter(int id);
+        int GetCounter(int id);
     }
 }

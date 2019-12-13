@@ -13,6 +13,8 @@ namespace DTO
         public TimeSpan time { get; set; }
 
         public int idStaff { get; set; }
+        public int countr { get; set; }
+
 
     }
 }

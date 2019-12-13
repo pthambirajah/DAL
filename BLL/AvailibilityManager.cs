@@ -36,5 +36,16 @@ namespace BLL
         {
             return AvailibilityDb.DeleteAvailability(id);
         }
+
+        public void IncrementCounter(int id)
+        {
+            AvailibilityDb.IncrementCounter(id);        
+        }
+        public int GetCounter(int id)
+        {
+            return AvailibilityDb.GetCounter(id);
+        }
+
+
     }
 }

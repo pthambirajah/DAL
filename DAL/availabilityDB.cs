@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿    using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -104,6 +104,8 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    
+
                     string query = "UPDATE availibility SET isAvailable = 0 WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idAvailability", id);
@@ -128,7 +130,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM availability WHERE idAvailability=@idAvailability";
+                    string query = "DELETE FROM availibility WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idAvailability", id);
 
@@ -144,5 +146,73 @@ namespace DAL
 
             return result;
         }
+
+
+        //method to get the counter
+        public int GetCounter(int id)
+        {
+            int nbcounter = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT countr FROM availibility WHERE idAvailability = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            nbcounter = (int)dr["countr"];
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return nbcounter;
+        }
+
+        //method to increment the counter
+        public void IncrementCounter(int id)
+        
+
+        {
+
+            int nbcountr = GetCounter(id)+1;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE availibility SET countr = @nbcountr WHERE idAvailability=@id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@nbcountr", nbcountr);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

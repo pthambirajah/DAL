@@ -12,5 +12,10 @@ namespace DAL
         int DeleteAvailability(int id);
         Availability GetAvailability(int id);
         void UpdateAvailability(int id);
+
+        void IncrementCounter(int id);
+        int GetCounter(int id);
+
+
     }
 }

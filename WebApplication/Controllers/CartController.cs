@@ -47,8 +47,20 @@ namespace WebApplication.Controllers
             int idCustomer = cManger.GetCustomerIDByCredentials(idCredentials);
             AvailibilityManager aManager = new AvailibilityManager(Configuration);
 
-            //Make deliveryBoy unavailable at the choosen time
-            aManager.UpdateAvailability(id);
+            //additioning the counter of the cur. time + cur. time + 15 + cur. time + 30
+            int totalCounter = aManager.GetCounter(id) + aManager.GetCounter(id + 1) + aManager.GetCounter(id + 2);
+
+            if (totalCounter > 5) 
+            {
+                //Make deliveryBoy unavailable at the choosen time
+                aManager.UpdateAvailability(id);
+            }
+
+
+            for (int i = id; i <= id+2; i++)
+            {
+                aManager.IncrementCounter(i);
+            }
 
             DeliveryManager dManager = new DeliveryManager(Configuration);
             dManager.AddDelivery(choosenTime, idStaff);
