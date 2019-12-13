@@ -214,5 +214,37 @@ namespace DAL
             }
         }
 
+        public int GetEntriesLeft(int id)
+        {
+            int nbcounter = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT countr FROM availibility WHERE idAvailability = @id AND ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            nbcounter = (int)dr["countr"];
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return nbcounter;
+        }
     }
 }
