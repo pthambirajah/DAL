@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using DTO;
 using BLL;
 using Microsoft.AspNetCore.Http;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -59,7 +60,8 @@ namespace WebApplication.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Cities");
+               
+                return RedirectToAction("loginError", "Error");
             }
         }
 
