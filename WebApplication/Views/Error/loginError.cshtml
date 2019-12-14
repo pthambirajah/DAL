@@ -1,0 +1,11 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "loginError";
+
+}
+
+<h2>Oops...</h2>
+
+<h3> @Html.DisplayFor(model => model.message)</h3>
+<a href="@Url.Action("Index", "Credentials")"> <button type="button" class="btn btn-info">Login</button></a>
+

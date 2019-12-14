@@ -10,10 +10,9 @@ namespace DAL
         Credentials AddCredentials(Credentials credentials);
      
         Credentials GetCredentials (int id);
-        
-        bool isAdmin(string username);
-        bool isStaff(string username);
 
+        int getStatus(string username);
+      
         string GetPassword(int idCredentials, string username);
         int GetIdStaff(string username);
 

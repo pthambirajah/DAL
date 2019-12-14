@@ -25,18 +25,23 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
             ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             CitiesManager cManager = new CitiesManager(Configuration);
             return View(cManager.GetCities());
         }
 
         public ActionResult Restaurants(int id)
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             RestaurantManager rManager = new RestaurantManager(Configuration);
             return View(rManager.GetRestaurantsOfCity(id));
         }
 
         public ActionResult Dishes(int id)
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             DishesManager dManager = new DishesManager(Configuration);
             return View(dManager.GetDishesOfRestaurant(id));
         }
