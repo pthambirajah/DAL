@@ -23,24 +23,40 @@ namespace WebApplication.Controllers
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
             ViewBag.username = HttpContext.Session.GetString("username");
+          
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            return View(cart);
+            
+                return View(cart);
+            
         }
+        
 
         public IActionResult DeleteItem(int idDish)
         {
             DishesManager dManager = new DishesManager(Configuration);
             int price = dManager.GetDishePrice(idDish);
             HttpContext.Session.SetInt32("TotalAmount", (int) HttpContext.Session.GetInt32("TotalAmount") - price);
-            
+           
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             var itemToRemove = cart.Single(d => d.Dishe.idDishes == idDish);
-            cart.Remove(itemToRemove);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            if (cart.Count == 1)
+            {
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", null);
+            }
+            else if (itemToRemove.Quantity>1)
+            {
+                cart.Remove(itemToRemove);
+                itemToRemove.Quantity--;
+                cart.Add(itemToRemove);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
 
+            }
+            else
+            {
+                cart.Remove(itemToRemove);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
             return RedirectToAction("Index", "Cart");
-
-
         }
 
         public IActionResult SelectTime()
@@ -73,15 +89,6 @@ namespace WebApplication.Controllers
 
             int entriesleft=0;
 
-            /*if (idAvailability <= 15)
-                entriesleft = 15 - idAvailability;
-            else if (idAvailability <= 30)
-                entriesleft = 30 - idAvailability;
-            else if (idAvailability <= 45)
-                entriesleft = 45 - idAvailability;
-*/
-
-            //if (entriesleft >= 2)
             if (idAvailability % 15 < 14)
             {
                 //additioning the counter of the cur. time + cur. time + 15 + cur. time + 30
@@ -96,7 +103,7 @@ namespace WebApplication.Controllers
                     aManager.IncrementCounter(i);
             }
             else if (idAvailability % 15 == 14)
-            //if (entriesleft == 14)
+  
             {
                 int totalCounter = aManager.GetCounter(idAvailability) + aManager.GetCounter(idAvailability + 1);
 
@@ -110,7 +117,6 @@ namespace WebApplication.Controllers
             }
             else if (idAvailability % 15 == 0)
             { 
-               // if (entriesleft == 0) {
                 int totalCounter = aManager.GetCounter(idAvailability);
 
                 if (totalCounter >= 5)
