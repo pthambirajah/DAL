@@ -32,15 +32,26 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li><a asp-area="" asp-controller="Cities" asp-action="Index">Cities</a></li>
                     <li><a asp-area="" asp-controller="Restaurants" asp-action="Index">Restaurants</a></li>
                     <li><a asp-area="" asp-controller="Dishes" asp-action="Index">Dishes</a></li>
                     <li><a asp-area="" asp-controller="Cities" asp-action="Index">Order Something</a></li>
-                    <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
                     <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
                     <li><a asp-area="" asp-controller="DishesOrder" asp-action="Index">To Deliver</a></li>
                     <li><a asp-area="" asp-controller="DishesOrder" asp-action="customerOrders">My Orders</a></li>
-                    <li><a>@Html.Raw(ViewBag.username)</a></li>
+
+                    <!--Me trying to instanciate a variable-->
+                    <?php ob_start(); ?>
+                    @Html.Raw(ViewBag.username)
+                    <?php $my_var = ob_get_clean(); ?>
+
+                    <!--Trying to display "Logout, ViewBagUSername" if it is not null.-->
+                    <?php if(!empty($my_var)) : ?>
+                    <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Logout, @Html.Raw(ViewBag.username)</a></li>
+                    <?php else : ?>
+                    <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
