@@ -35,10 +35,9 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a asp-area="" asp-controller="Cities" asp-action="Index">Order Something</a></li>
-                        <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
                         <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
                         <li><a asp-area="" asp-controller="DishesOrder" asp-action="customerOrders">My Orders</a></li>
-                        <li><a>@Html.Raw(ViewBag.username)</a></li>
+                        <li> <a asp-area="" asp-controller="Credentials" asp-action="Index">Logout, @Html.Raw(ViewBag.username)?</a></li>
                     </ul>
                 </div>
             }
@@ -46,9 +45,8 @@
             {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
                         <li><a asp-area="" asp-controller="DishesOrder" asp-action="Index">To Deliver</a></li>
-                        <li><a>@Html.Raw(ViewBag.username)</a></li>
+                        <li> <a asp-area="" asp-controller="Credentials" asp-action="Index">Logout, @Html.Raw(ViewBag.username)?</a></li>
                     </ul>
                 </div>
             }
