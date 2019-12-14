@@ -6,8 +6,6 @@ namespace DAL
 {
     public interface IAvailabilityDB
     {
-        IConfiguration Configuration { get; }
-
         List<Availability> GetAvailabilitiesByRestaurant(int id);
 
         void UpdateAvailability(int id);
@@ -15,6 +13,7 @@ namespace DAL
         void IncrementCounter(int id);
         int GetCounter(int id);
 
+        void ResetAvailability();
 
     }
 }

@@ -8,8 +8,6 @@ namespace BLL
 {
     public interface ICitiesManager
     {
-        ICitiesDB CitiesDB { get; }
-
         List<Cities> GetCities();
     
     }

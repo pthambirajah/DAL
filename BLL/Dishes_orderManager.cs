@@ -8,9 +8,7 @@ namespace BLL
 {
     public class Dishes_orderManager
     {
-
-        public IDishes_orderDB Dishes_orderDb { get; }
-
+        private IDishes_orderDB Dishes_orderDb { get; }
 
         public Dishes_orderManager(IConfiguration configuration)
         {

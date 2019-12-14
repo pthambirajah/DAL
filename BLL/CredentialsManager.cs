@@ -8,7 +8,7 @@ namespace BLL
 {
     public class CredentialsManager
     {
-        public CredentialsDB CredentialsDb { get; }
+        private CredentialsDB CredentialsDb { get; }
 
        
         public CredentialsManager(IConfiguration configuration)

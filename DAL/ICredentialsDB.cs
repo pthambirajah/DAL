@@ -6,7 +6,6 @@ namespace DAL
 {
     public interface ICredentialsDB
     {
-        IConfiguration Configuration { get; }
         Credentials AddCredentials(Credentials credentials);
      
         Credentials GetCredentials (int id);

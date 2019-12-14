@@ -9,7 +9,7 @@ namespace BLL
     public class DishesManager
     {
 
-        public IDishesDB DishesDb { get; }
+        private IDishesDB DishesDb { get; }
 
 
         public DishesManager(IConfiguration configuration)

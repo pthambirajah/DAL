@@ -7,7 +7,7 @@ namespace BLL
 {
     public class AvailibilityManager
     {
-        public AvailabilityDB AvailibilityDb { get; }
+        private AvailabilityDB AvailibilityDb { get; }
 
 
         public AvailibilityManager(IConfiguration configuration)
@@ -20,8 +20,11 @@ namespace BLL
         {
             return AvailibilityDb.GetAvailabilitiesByRestaurant(id);
         }
-     
 
+        public void ResetAvailability()
+        {
+            AvailibilityDb.ResetAvailability();
+        }
         public void UpdateAvailability(int id)
         {
             AvailibilityDb.UpdateAvailability(id);

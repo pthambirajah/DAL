@@ -7,8 +7,6 @@ namespace DAL
 {
     public interface IDeliveryDB
     {
-        IConfiguration Configuration { get; }
-
         void AddDelivery(TimeSpan choosenTime, int idStaff);
         int GetLastId();
     }
