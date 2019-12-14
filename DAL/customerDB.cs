@@ -10,7 +10,7 @@ namespace DAL
     public class CustomerDB : ICustomerDB
     {
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         public CustomerDB(IConfiguration configuration)
         {
             Configuration = configuration;

@@ -9,7 +9,7 @@ namespace DAL
 {
     public class DishesDB : IDishesDB
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         public DishesDB(IConfiguration configuration)
         {
             Configuration = configuration;

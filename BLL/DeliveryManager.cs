@@ -8,7 +8,7 @@ namespace BLL
 {
     public class DeliveryManager
     {
-        public DeliveryDB DeliveryDb { get; }
+        private DeliveryDB DeliveryDb { get; }
 
 
         public DeliveryManager(IConfiguration configuration)

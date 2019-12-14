@@ -9,7 +9,7 @@ namespace DAL
 {
     public class CredentialsDB : ICredentialsDB
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         public CredentialsDB(IConfiguration configuration)
         {
             Configuration = configuration;

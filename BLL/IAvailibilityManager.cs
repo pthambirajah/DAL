@@ -8,8 +8,6 @@ namespace BLL
 {
     interface IAvailibilityManager
     {
-        IAvailabilityDB AvailabilityDB { get; }
-
         List<Availability> GetAvailabilitiesByRestaurant(int id);
 
         Availability AddAvailibility(Availability availibility);

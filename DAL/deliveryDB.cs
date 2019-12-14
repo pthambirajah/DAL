@@ -9,8 +9,8 @@ namespace DAL
 {
     public class DeliveryDB : IDeliveryDB
     {
-        
-            public IConfiguration Configuration { get; }
+
+        private IConfiguration Configuration { get; }
             public DeliveryDB(IConfiguration configuration)
             {
                 Configuration = configuration;

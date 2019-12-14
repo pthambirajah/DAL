@@ -8,8 +8,6 @@ namespace BLL
 {
     interface ICredentialsManager
     {
-        ICredentialsDB CredentialsDB { get; }
-
         Credentials AddCredentials(Credentials credentials);
        
         Credentials GetIdCredentials(string username);

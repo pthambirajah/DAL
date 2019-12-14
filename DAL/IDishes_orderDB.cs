@@ -6,8 +6,6 @@ namespace DAL
 {
     public interface IDishes_orderDB
     {
-        IConfiguration Configuration { get; }
-
         void AddDishes_order(int idDishe, int idLastOrder, int quantity);
         List<deliveryItem> GetDishes_orderByStaff(int id);
 

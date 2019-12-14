@@ -8,11 +8,7 @@ namespace BLL
 {
     interface IDeliveryManager
     {
-
-        IDeliveryDB DeliveryDB { get; }
-
         Delivery AddDelivery(TimeSpan choosenTime, int idStaff);
-
 
         int GetLastId();
     }

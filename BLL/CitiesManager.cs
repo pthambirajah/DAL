@@ -7,8 +7,7 @@ namespace BLL
 {
     public class CitiesManager
     {
-        public CitiesDB CitiesDb { get; }
-
+        private CitiesDB CitiesDb { get; }
 
         public CitiesManager(IConfiguration configuration)
         {

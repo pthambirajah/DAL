@@ -9,12 +9,11 @@ namespace DAL
 {
     public class AvailabilityDB : IAvailabilityDB
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         public AvailabilityDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
 
         public List<Availability> GetAvailabilitiesByRestaurant(int id)
         {

@@ -8,7 +8,7 @@ namespace BLL
 {
     public class CustomerManager
     {
-        public CustomerDB CustomerDb { get; }
+        private CustomerDB CustomerDb { get; }
 
 
         public CustomerManager(IConfiguration configuration)

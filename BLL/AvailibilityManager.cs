@@ -7,7 +7,7 @@ namespace BLL
 {
     public class AvailibilityManager
     {
-        public AvailabilityDB AvailibilityDb { get; }
+        private AvailabilityDB AvailibilityDb { get; }
 
 
         public AvailibilityManager(IConfiguration configuration)

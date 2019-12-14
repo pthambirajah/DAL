@@ -9,7 +9,7 @@ namespace DAL
 {
     public class CitiesDB : ICitiesDB
     {
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         public CitiesDB(IConfiguration configuration)
         {
             Configuration = configuration;
