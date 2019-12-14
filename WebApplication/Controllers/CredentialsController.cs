@@ -17,9 +17,13 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
+
+        
+
         [HttpGet]
         public IActionResult Index()
         {
+            HttpContext.Session.Clear();
             ViewBag.username = HttpContext.Session.GetString("username");
             return View();
         }
