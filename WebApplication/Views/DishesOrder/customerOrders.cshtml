@@ -4,63 +4,72 @@
     ViewData["Title"] = "customerOrders";
 }
 
-<h2>customerOrders</h2>
+<h2>My orders</h2>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dishesname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.deliveryTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    @if (Model != null)
+    {
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idOrder)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dishesname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.deliveryTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.status)
-                </td>
-                <td>
-                    @{
-                        TimeSpan limit = DateTime.Now.TimeOfDay;
-                        TimeSpan variation = TimeSpan.FromHours(3);
-                        limit = limit.Add(variation);
-                    }
-                    <!--Compare delivery time and actual time + 3hours. If the delivery is later than our condition we can cancel the order-->
-                    @if (TimeSpan.Compare(item.deliveryTime, limit) > 0)
-                    {
-                        @Html.ActionLink("Cancel", "Cancel", new { idOrder=item.idOrder })
-                    }
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.idOrder)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dishesname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deliveryTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.status)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dishesname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deliveryTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @{
+                            TimeSpan limit = DateTime.Now.TimeOfDay;
+                            TimeSpan variation = TimeSpan.FromHours(3);
+                            limit = limit.Add(variation);
+                        }
+                        <!--Compare delivery time and actual time + 3hours. If the delivery is later than our condition we can cancel the order-->
+                        @if (TimeSpan.Compare(item.deliveryTime, limit) > 0)
+                        {
+                            @Html.ActionLink("Cancel", "Cancel", new { idOrder = item.idOrder })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+    else
+    {
+        <h4>You have no orders yet.</h4>
+        <a href="@Url.Action("Index", "Cities")" class="btn btn-success btn-block">Order something <i class="fa fa-angle-right"></i></a>
+
+    }
 </table>
 
 

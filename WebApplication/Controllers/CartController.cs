@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,22 @@ namespace WebApplication.Controllers
             ViewBag.username = HttpContext.Session.GetString("username");
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             return View(cart);
+        }
+
+        public IActionResult DeleteItem(int idDish)
+        {
+            DishesManager dManager = new DishesManager(Configuration);
+            int price = dManager.GetDishePrice(idDish);
+            HttpContext.Session.SetInt32("TotalAmount", (int) HttpContext.Session.GetInt32("TotalAmount") - price);
+            
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            var itemToRemove = cart.Single(d => d.Dishe.idDishes == idDish);
+            cart.Remove(itemToRemove);
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+
+            return RedirectToAction("Index", "Cart");
+
+
         }
 
         public IActionResult SelectTime()
