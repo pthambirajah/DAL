@@ -17,10 +17,10 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
-
         public ActionResult Index()
         {
             ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             RestaurantManager rManager = new RestaurantManager(Configuration);
             return View(rManager.GetRestaurants());
         }

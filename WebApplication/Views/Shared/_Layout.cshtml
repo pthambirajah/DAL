@@ -30,19 +30,28 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Valais Eat</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Cities" asp-action="Index">Cities</a></li>
-                    <li><a asp-area="" asp-controller="Restaurants" asp-action="Index">Restaurants</a></li>
-                    <li><a asp-area="" asp-controller="Dishes" asp-action="Index">Dishes</a></li>
-                    <li><a asp-area="" asp-controller="Cities" asp-action="Index">Order Something</a></li>
-                    <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
-                    <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
-                    <li><a asp-area="" asp-controller="DishesOrder" asp-action="Index">To Deliver</a></li>
-                    <li><a asp-area="" asp-controller="DishesOrder" asp-action="customerOrders">My Orders</a></li>
-                    <li><a>@Html.Raw(ViewBag.username)</a></li>
-                </ul>
-            </div>
+            @if (ViewBag.userType == 0)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Cities" asp-action="Index">Order Something</a></li>
+                        <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
+                        <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
+                        <li><a asp-area="" asp-controller="DishesOrder" asp-action="customerOrders">My Orders</a></li>
+                        <li><a>@Html.Raw(ViewBag.username)</a></li>
+                    </ul>
+                </div>
+            }
+            @if (ViewBag.userType == 1)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Credentials" asp-action="Index">Login</a></li>
+                        <li><a asp-area="" asp-controller="DishesOrder" asp-action="Index">To Deliver</a></li>
+                        <li><a>@Html.Raw(ViewBag.username)</a></li>
+                    </ul>
+                </div>
+            }
         </div>
     </nav>
 

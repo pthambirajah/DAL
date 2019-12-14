@@ -23,10 +23,10 @@ namespace WebApplication.Controllers
         {
             int id = (int) HttpContext.Session.GetInt32("idStaff");
             ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
             return View(dManager.GetDishes_orderByStaff(id));
         }
-
         
         public IActionResult UpdateOrderStatus (int idOrder)
         {
@@ -42,6 +42,7 @@ namespace WebApplication.Controllers
         {
             int id = (int)HttpContext.Session.GetInt32("idCustomer");
             ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
             return View(dManager.GetDishes_orderByCustomer(id));
         }

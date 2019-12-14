@@ -20,14 +20,11 @@ namespace WebApplication.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             ViewBag.username = HttpContext.Session.GetString("username");
             DishesManager dManager = new DishesManager(Configuration);
 
             return View(dManager.GetDishes());
-        }
-
-      
-
-        
+        } 
     }
 }

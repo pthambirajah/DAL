@@ -21,13 +21,18 @@ namespace WebApplication.Controllers
         public IActionResult Index()
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
-
+            ViewBag.username = HttpContext.Session.GetString("username");
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             return View(cart);
         }
 
         public IActionResult SelectTime()
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
+            if (HttpContext.Session.GetInt32("id")== null) {
+                return RedirectToAction("loginError", "Error", new { message = "Unfortunately it seems like you are not logged in. Please log in." });
+            }
             int restaurant = 0;
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             foreach (Item dish in cart)
@@ -41,6 +46,8 @@ namespace WebApplication.Controllers
         
         public IActionResult ProceedCheckout(int idAvailability, int idStaff, TimeSpan choosenTime)
         {
+            ViewBag.username = HttpContext.Session.GetString("username");
+            ViewBag.userType = HttpContext.Session.GetInt32("userType");
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
             int idCredentials = (int)HttpContext.Session.GetInt32("id");
             CustomerManager cManger = new CustomerManager(Configuration);

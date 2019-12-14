@@ -37,9 +37,9 @@ namespace BLL
             return CredentialsDb.GetPassword(idCredentials, username);
         }
 
-        public bool isAdmin(string username)
+        public int getStatus(string username)
         {
-            return CredentialsDb.isAdmin(username);
+            return CredentialsDb.getStatus(username);
         }
 
         public int GetIdStaff(string username)
@@ -47,10 +47,6 @@ namespace BLL
             return CredentialsDb.GetIdStaff(username);
         }
 
-        public bool isStaff(string username)
-        {
-            return CredentialsDb.isStaff(username);
-        }
 
     }
 }

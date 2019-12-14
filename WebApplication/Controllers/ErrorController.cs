@@ -9,10 +9,11 @@ namespace WebApplication.Controllers
 {
     public class ErrorController : Controller
     {
-        public IActionResult loginError()
+        public IActionResult loginError(string message)
         {
             ErrorViewModel notFound = new ErrorViewModel();
-            notFound.message = "Unfortunately your username or password did not match our records. Please try again.";
+            //notFound.message = "Unfortunately your username or password did not match our records. Please try again.";
+            notFound.message = message;
             return View(notFound);
         }
     }
