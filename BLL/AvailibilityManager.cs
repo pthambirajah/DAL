@@ -20,8 +20,11 @@ namespace BLL
         {
             return AvailibilityDb.GetAvailabilitiesByRestaurant(id);
         }
-     
 
+        public void ResetAvailability()
+        {
+            AvailibilityDb.ResetAvailability();
+        }
         public void UpdateAvailability(int id)
         {
             AvailibilityDb.UpdateAvailability(id);

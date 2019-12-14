@@ -13,7 +13,6 @@ namespace WebApplication.Controllers
     {
         private IConfiguration Configuration { get; }
 
-
         public CredentialsController(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -43,7 +42,7 @@ namespace WebApplication.Controllers
                 HttpContext.Session.SetInt32("userType", userStatus);
                 if (userStatus==2)
                 {
-                    return RedirectToAction("Index", "DishesOrder");
+                    return RedirectToAction("Index", "Home");
                 }
 
                else if (userStatus == 1)

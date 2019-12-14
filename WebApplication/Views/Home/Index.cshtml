@@ -3,16 +3,25 @@
     ViewData["User"] = ViewBag.username;
 }
 
-<div class="row">
-    <div class="col-md-8">
-        <h2>How it works</h2>
-        <ul>
-            <li>Select a City</li>
-            <li>Then you will see the restaurant of the city</li>
-            <li>Select a Restaurant</li>
-            <li>Then you will see the dishes of the restaurant</li>
-            <li>Select one or many dishes</li>
-            <li>Then you proceed to checkout and confirm your order</li>
-        </ul>
+    <div class="row">
+        @if (ViewBag.userType == 0)
+        {
+            <div class="col-md-8">
+                <h2>How it works</h2>
+                <ul>
+                    <li>Select a City</li>
+                    <li>Then you will see the restaurant of the city</li>
+                    <li>Select a Restaurant</li>
+                    <li>Then you will see the dishes of the restaurant</li>
+                    <li>Select one or many dishes</li>
+                    <li>Then you proceed to checkout and confirm your order</li>
+                </ul>
+            </div>
+        }
+        @if (ViewBag.userType == 2)
+        {
+            
+            <a href="@Url.Action("reset", "Availability")" class="btn btn-warning"><i class="fa fa-angle-left"></i>Reset Availabilites of delivery employees</a>
+            
+        }
     </div>
-</div>

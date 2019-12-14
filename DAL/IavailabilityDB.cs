@@ -15,6 +15,7 @@ namespace DAL
         void IncrementCounter(int id);
         int GetCounter(int id);
 
+        void ResetAvailability();
 
     }
 }
