@@ -10,7 +10,7 @@ namespace DAL
      
         Credentials GetCredentials (int id);
 
-        int getStatus(string username);
+        int GetStatus(string username);
       
         string GetPassword(int idCredentials, string username);
         int GetIdStaff(string username);

@@ -15,9 +15,9 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //Retrieve available delivery time of the staff who works in the same city as the restaurant given in parameter.
         public List<Availability> GetAvailabilitiesByRestaurant(int id)
         {
-            
             List<Availability> availability = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 

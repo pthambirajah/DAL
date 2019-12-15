@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BLL;
 using DTO;
 using Microsoft.AspNetCore.Http;
@@ -14,8 +11,6 @@ namespace WebApplication.Controllers
 {
     public class CitiesController : Controller
     {
-        List<int> cart;
-
         private IConfiguration Configuration { get; }
         public CitiesController(IConfiguration configuration)
         {
@@ -71,7 +66,7 @@ namespace WebApplication.Controllers
             else
             {
                 List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-                int index = isExist(id);
+                int index = DoesExist(id);
                 if (index != -1)
                 {
                     cart[index].Quantity++;
@@ -85,18 +80,18 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-            private int isExist(int id)
+        private int DoesExist(int id)
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            for (int i = 0; i < cart.Count; i++)
             {
-                List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-                for (int i = 0; i < cart.Count; i++)
+                if (cart[i].Dishe.idDishes.Equals(id))
                 {
-                    if (cart[i].Dishe.idDishes.Equals(id))
-                    {
-                        return i;
-                    }
+                    return i;
                 }
-                return -1;
             }
-
+            return -1;
         }
+        
+    }
 }

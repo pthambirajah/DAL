@@ -185,11 +185,11 @@ namespace DAL
             return idStaff;
         }
 
-        
-        public int getStatus(string username)
+        public int GetStatus(string username)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            int accessLevel = 0;
+            //We give 3 as it give access to nothing
+            int accessLevel = 3;
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -204,8 +204,10 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-
-                            accessLevel = (int)dr["status"];
+                            if (dr["status"] != null)
+                            {
+                                accessLevel = (int)dr["status"];
+                            }
                         }
 
                     }

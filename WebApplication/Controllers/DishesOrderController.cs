@@ -56,7 +56,7 @@ namespace WebApplication.Controllers
             }
             else
             {
-                return RedirectToAction("orderCancelError", "Error", new { message = "Unfortunately you cannot cancel this order anymore. You should have cancelled 3 hours before the delivery time. Sorry :(" });
+                return RedirectToAction("OrderCancelError", "Error", new { message = "Unfortunately you cannot cancel this order anymore. You should have cancelled 3 hours before the delivery time. Sorry :(" });
             }
             return RedirectToAction("customerOrders");
         }

@@ -52,7 +52,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime, d.quantity, o.idOrder, o.status FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id";
+                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime, d.quantity, o.idOrder, o.status FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id AND delivery.deliveryDate=CAST(getdate() AS date)";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -74,7 +74,10 @@ namespace DAL
                             deliveryItem.address = (string)dr["address"];
                             deliveryItem.idCity = (int)dr["idCity"];
                             deliveryItem.deliveryTime = (TimeSpan)dr["deliveryTime"];
-                            deliveryItem.Quantity = (int)dr["quantity"];
+                            if (dr["quantity"] != null)
+                            {
+                                deliveryItem.Quantity = (int)dr["quantity"];
+                            }
                             deliveryItem.idOrder = (int)dr["idOrder"];
                             deliveryItem.status = (string)dr["status"];
 
