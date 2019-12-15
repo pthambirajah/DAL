@@ -84,7 +84,8 @@ namespace WebApplication.Controllers
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
-            return RedirectToAction("Index");
+            //Redirect to the cart
+            return RedirectToAction("Index", "Cart");
         }
 
         //Go through the list of item and try to match the id with an existing dish

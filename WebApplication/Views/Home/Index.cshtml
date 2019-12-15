@@ -20,20 +20,22 @@
             <div class="col-md-8">
                 <h2>How it works</h2>
                 <ul>
-                    <li>Select a City</li>
+                    <li>Select a City in the tab "order something"</li>
                     <li>Then you will see the restaurant of the city</li>
                     <li>Select a Restaurant</li>
                     <li>Then you will see the dishes of the restaurant</li>
-                    <li>Select one or many dishes</li>
-                    <li>Then you proceed to checkout and confirm your order</li>
+                    <li>Select one or many dishes, it will brings you to the cart.</li>
+                    <li>Then you proceed to checkout and confirm your order by selecting a delivery time.</li>
+                    <li>You can see all your orders in "My order" tab and cancel an order if there are still 3 hours remaining to the delivery time.</li>
+                    <li>Logout using the tab "username, logout?"</li>
                 </ul>
             </div>
 
         }
         @if (ViewBag.userType == 2)
         {
-
-            <a href="@Url.Action("Reset", "Availability")" class="btn btn-warning"><i class="fa fa-angle-left"></i>Reset Availabilites of delivery employees</a>
+            <br/>
+            <a href="@Url.Action("Reset", "Availability")" class="btn btn-warning">Reset Availabilites of delivery employees</a>
 
         }
     </div>

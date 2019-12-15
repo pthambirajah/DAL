@@ -57,7 +57,7 @@ namespace WebApplication.Controllers
         {
             HttpContext.Session.SetInt32("idOrder", idOrder);
             TimeSpan limit = DateTime.Now.TimeOfDay;
-            TimeSpan variation = TimeSpan.FromHours(3);
+            TimeSpan variation = TimeSpan.FromHours(0);
             limit = limit.Add(variation);
             if (TimeSpan.Compare(deliveryTime, limit) > 0)
             {

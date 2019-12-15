@@ -52,7 +52,7 @@
                 </td>
 
                 <td>
-                    @if (item.status != "archived")
+                    @if (item.status != "archived" && item.status != "cancelled" )
                     {
                         @Html.ActionLink("Archive", "UpdateOrderStatus", new { idOrder = item.idOrder })
                     }
@@ -60,5 +60,5 @@
             </tr>
         }
     </tbody>
-    }
+    
 </table>
