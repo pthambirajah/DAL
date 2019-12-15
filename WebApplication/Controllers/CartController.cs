@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BLL;
-using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +25,6 @@ namespace WebApplication.Controllers
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             
                 return View(cart);
-            
         }
         
 
@@ -86,8 +83,6 @@ namespace WebApplication.Controllers
             CustomerManager cManger = new CustomerManager(Configuration);
             int idCustomer = cManger.GetCustomerIDByCredentials(idCredentials);
             AvailibilityManager aManager = new AvailibilityManager(Configuration);
-
-            int entriesleft=0;
 
             if (idAvailability % 15 < 14)
             {

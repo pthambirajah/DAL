@@ -49,16 +49,11 @@
                         @Html.DisplayFor(modelItem => item.status)
                     </td>
                     <td>
-                        @{
-                            TimeSpan limit = DateTime.Now.TimeOfDay;
-                            TimeSpan variation = TimeSpan.FromHours(3);
-                            limit = limit.Add(variation);
-                        }
+                     
                         <!--Compare delivery time and actual time + 3hours. If the delivery is later than our condition we can cancel the order-->
-                        @if (TimeSpan.Compare(item.deliveryTime, limit) > 0)
-                        {
-                            @Html.ActionLink("Cancel", "Cancel", new { idOrder = item.idOrder })
-                        }
+                       @if (item.status != "cancelled") {
+                        @Html.ActionLink("Cancel", "Cancel", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime })
+                       }
                     </td>
                 </tr>
             }

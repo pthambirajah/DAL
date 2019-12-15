@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -47,10 +44,20 @@ namespace WebApplication.Controllers
             return View(dManager.GetDishes_orderByCustomer(id));
         }
 
-        public IActionResult cancel(int idOrder)
+        public IActionResult cancel(int idOrder, TimeSpan deliveryTime)
         {
-            Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
-            dManager.UpdateOrderStatusToCancel(idOrder);
+            TimeSpan limit = DateTime.Now.TimeOfDay;
+            TimeSpan variation = TimeSpan.FromHours(12);
+            limit = limit.Add(variation);
+            if (TimeSpan.Compare(deliveryTime, limit) > 0)
+            {
+                Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
+                dManager.UpdateOrderStatusToCancel(idOrder);
+            }
+            else
+            {
+                return RedirectToAction("OrderCancelError", "Error", new { message = "Unfortunately you cannot cancel this order anymore. You should have cancelled 3 hours before the delivery time. Sorry :(" });
+            }
             return RedirectToAction("customerOrders");
         }
     }
