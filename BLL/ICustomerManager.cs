@@ -11,6 +11,9 @@ namespace BLL
         Customer AddCustomer(Customer customer);
 
         int GetCustomerIDByCredentials(int id);
-        
+        Customer GetFirstnameLastname(int id);
+
+
+
     }
 }

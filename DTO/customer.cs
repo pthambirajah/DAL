@@ -7,8 +7,8 @@ namespace DTO
     public class Customer
     {
         public int idCustomer { get; set; }
-        public string lastname { get; set; }
-        public string firstname { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
         public DateTime birthdate { get; set; }
         public string address { get; set; }
         public int idCity { get; set; }

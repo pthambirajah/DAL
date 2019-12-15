@@ -29,5 +29,10 @@ namespace BLL
         {
             return CustomerDb.AddCustomer(customer);
         }
+
+        public Customer GetFirstnameLastname(int id)
+        {
+            return CustomerDb.GetFirstnameLastname(id);
+        }
     }
 }

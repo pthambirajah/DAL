@@ -39,8 +39,8 @@ namespace DAL
                             customer = new Customer();
 
                             customer.idCustomer = (int)dr["idCustomer"];
-                            customer.lastname = (string)dr["lastname"];
-                            customer.firstname = (string)dr["firstname"];
+                            customer.LastName = (string)dr["lastname"];
+                            customer.FirstName = (string)dr["firstname"];
                             customer.birthdate = (DateTime)dr["birthdate"];
                             customer.address = (string)dr["address"];
                             customer.idCity = (int)dr["idCity"];
@@ -102,8 +102,8 @@ namespace DAL
                     string query = "INSERT INTO availability(idCustomer, lastname, firstname, birthdate, address, idCity, idCredentials) VALUES(@idCustomer, @lastname, @firstname, @birthdate, @address, @idCity, @idCredentials); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idCustomer", customer.idCustomer);
-                    cmd.Parameters.AddWithValue("@lastname", customer.lastname);
-                    cmd.Parameters.AddWithValue("@firstname", customer.firstname);
+                    cmd.Parameters.AddWithValue("@lastname", customer.LastName);
+                    cmd.Parameters.AddWithValue("@firstname", customer.FirstName);
                     cmd.Parameters.AddWithValue("@birthdate", customer.birthdate);
                     cmd.Parameters.AddWithValue("@address", customer.address);
                     cmd.Parameters.AddWithValue("@idStaff", customer.idCity);
@@ -123,5 +123,39 @@ namespace DAL
             return customer;
         }
 
+        public Customer GetFirstnameLastname(int id)
+        {
+            Customer customer = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT lastname, firstname FROM customer WHERE idCustomer = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            customer = new Customer();
+
+                            customer.FirstName = (string)dr["firstname"];
+                            customer.LastName = (string)dr["lastname"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return customer;
+        }
     }
 }

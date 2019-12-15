@@ -1,0 +1,37 @@
+﻿@model DTO.Customer
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Cancel your order</h2>
+
+<h2>Please enter your name and firstname to cancel your order.</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Html.LabelFor(m => m.FirstName) <br />
+                @Html.TextBoxFor(m => m.FirstName)
+            </div>
+            <br />
+            <div>
+                @ViewBag.LName
+                @Html.LabelFor(m => m.LastName) <br />
+                @Html.TextBoxFor(m => m.LastName)
+            </div>
+            <input type="submit" value="Submit" />
+
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
