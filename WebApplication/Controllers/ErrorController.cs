@@ -5,6 +5,7 @@ namespace WebApplication.Controllers
 {
     public class ErrorController : Controller
     {
+        //Common controller for most of our errors, it displays a message and a button to redirect the user.
         public IActionResult LoginError(string message)
         {
             ErrorViewModel notFound = new ErrorViewModel();

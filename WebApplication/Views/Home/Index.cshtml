@@ -3,48 +3,33 @@
     ViewData["User"] = ViewBag.username;
 }
 
-    <div class="row">
-        @if (ViewBag.userType == 0)
-        {
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="~/images/resized_kotturoti.jpg" alt="ASP.NET" class="img-responsive" />
-                    </div>
-
+<div class="row">
+    @if (ViewBag.userType == 0)
+    {
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="~/images/resized_kotturoti.jpg" alt="ASP.NET" class="img-responsive" />
                 </div>
             </div>
-            <div class="col-md-8">
-                <h2>How it works</h2>
-                <ul>
-                    <li>Select a City</li>
-                    <li>Then you will see the restaurant of the city</li>
-                    <li>Select a Restaurant</li>
-                    <li>Then you will see the dishes of the restaurant</li>
-                    <li>Select one or many dishes</li>
-                    <li>Then you proceed to checkout and confirm your order</li>
-                </ul>
-            </div>
-
-            <!--<div class="col-md-8, text-center">
-                <h2>How does it work?</h2>
-                <ul>
-                    <li>Select a City</li>
-                    <li>Then you will see the restaurant of the city</li>
-                    <li>Select a Restaurant</li>
-                    <li>Then you will see the dishes of the restaurant</li>
-                    <li>Select one or many dishes</li>
-                    <li>Then you proceed to checkout and confirm your order</li>
-                </ul>
-            </div> -->
-        }
-        @if (ViewBag.userType == 2)
-        {
-
-            <a href="@Url.Action("Reset", "Availability")" class="btn btn-warning"><i class="fa fa-angle-left"></i>Reset Availabilites of delivery employees</a>
-
-        }
-    </div>
+        </div>
+        <div class="col-md-8">
+            <h2>How it works</h2>
+            <ul>
+                <li>Select a City</li>
+                <li>Then you will see the restaurant of the city</li>
+                <li>Select a Restaurant</li>
+                <li>Then you will see the dishes of the restaurant</li>
+                <li>Select one or many dishes</li>
+                <li>Then you proceed to checkout and confirm your order</li>
+            </ul>
+        </div>
+    }
+    @if (ViewBag.userType == 2)
+    {
+        <a href="@Url.Action("Reset", "Availability")" class="btn btn-warning"><i class="fa fa-angle-left"></i>Reset Availabilites of delivery employees</a>
+    }
+</div>

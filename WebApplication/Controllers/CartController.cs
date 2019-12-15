@@ -61,7 +61,8 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-
+        //Display available delivery time for a staff 
+        //But the user must be logged in
         public IActionResult SelectTime()
         {
             ViewBag.username = HttpContext.Session.GetString("username");
@@ -71,6 +72,7 @@ namespace WebApplication.Controllers
             }
             int restaurant = 0;
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            //We reuse the id of the restaurant to find our its location and suggest the correct staff's availability
             foreach (Item dish in cart)
             {
                 restaurant = dish.Dishe.idRestaurant;
@@ -79,7 +81,7 @@ namespace WebApplication.Controllers
             return View(aManager.GetAvailabilitiesByRestaurant(restaurant));
         }
 
-        
+        //Insert the cart into the database
         public IActionResult ProceedCheckout(int idAvailability, int idStaff, TimeSpan choosenTime)
         {
             ViewBag.username = HttpContext.Session.GetString("username");
@@ -127,15 +129,16 @@ namespace WebApplication.Controllers
                 aManager.IncrementCounter(idAvailability);
             }
         
+            //First we add the delivery
             DeliveryManager dManager = new DeliveryManager(Configuration);
             dManager.AddDelivery(choosenTime, idStaff);
             int lastDelivery = dManager.GetLastId();
 
             OrderManager oManager = new OrderManager(Configuration);
-
+            //Then we create the order
             oManager.AddOrder(idCustomer, lastDelivery);
             int lastOrder = oManager.GetLastId();
-
+            //Finaly we link each dish to the order in the dish_order table
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             Dishes_orderManager doManager = new Dishes_orderManager(Configuration);
 
@@ -143,7 +146,7 @@ namespace WebApplication.Controllers
             {
                 doManager.AddDishes_order(dish.Dishe.idDishes, lastOrder, dish.Quantity);
             }
-
+            //This way we respect every foreign key and we do not generate errors.
             cart = null;
             //Clean up cart
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);

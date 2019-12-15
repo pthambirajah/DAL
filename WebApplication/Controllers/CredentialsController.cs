@@ -59,10 +59,11 @@ namespace WebApplication.Controllers
                     HttpContext.Session.SetInt32("idCustomer", cManager.GetCustomerIDByCredentials(idUserTryingToConnect));
                     return RedirectToAction("Index", "Home");
                 }
+                //If we did find a username and password but not a status we through an error.
                 return RedirectToAction("LoginError", "Error", new { message = "Your account is not correctly initialized. Please contact our support : support@vdeat.ch or connect with another account." });
             }
             else
-            {
+            {   //If the credentials did not match we through an error
                 return RedirectToAction("LoginError", "Error", new { message = "Unfortunately your username or password did not match our records. Please try again." });
             }
         }

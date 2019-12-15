@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
-
+        //Display to the delivery employee all the deliveries to do of the day
         public IActionResult Index()
         {
             int id = (int) HttpContext.Session.GetInt32("idStaff");
@@ -31,7 +31,7 @@ namespace WebApplication.Controllers
             }
             return RedirectToAction("NoOrderError", "Error", new { message ="You don't have any orders, enjoy while it lasts! :-)" });
         }
-        
+        //Used by the delivery employee to archive a delivery once it is done.
         public IActionResult UpdateOrderStatus (int idOrder)
         {
             int id = (int)HttpContext.Session.GetInt32("idStaff");
@@ -42,7 +42,8 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult customerOrders()
+        //Display all the orders and their status that a customer have ever made
+        public IActionResult CustomerOrders()
         {
             int id = (int)HttpContext.Session.GetInt32("idCustomer");
             ViewBag.username = HttpContext.Session.GetString("username");
@@ -51,6 +52,7 @@ namespace WebApplication.Controllers
             return View(dManager.GetDishes_orderByCustomer(id));
         }
 
+        //Little checkup before cancelling an order, there must be 3 hours remaining before the specified delivery time for a cancellation.
         public IActionResult CheckBeforeCancel(int idOrder, TimeSpan deliveryTime, int idStaff)
         {
             HttpContext.Session.SetInt32("idOrder", idOrder);
@@ -59,16 +61,20 @@ namespace WebApplication.Controllers
             limit = limit.Add(variation);
             if (TimeSpan.Compare(deliveryTime, limit) > 0)
             {
+                //We store the idStaff who will "lose" a delivery
                 HttpContext.Session.SetInt32("idStaffToDecrement", idStaff);
                 SessionHelper.SetObjectAsJson(HttpContext.Session,"deliveryTimeToCancel", deliveryTime);
                 return View();
             }
             else
             {
+                //Through an error if the cancellation is not possible
                 return RedirectToAction("OrderCancelError", "Error", new { message = "Unfortunately you cannot cancel this order anymore. You should have cancelled 3 hours before the delivery time. Sorry :(" });
             }
         }
 
+        //Cancel an order and decrement a counter so the delivery employee may be available again
+        //The user must enter his firstname and lastaname correctly to make all this happening.
         public ActionResult CancelOrder(Customer customerModel)
         {
             var customerDbManager = new CustomerManager(Configuration);
@@ -99,6 +105,7 @@ namespace WebApplication.Controllers
             }
             else
             {
+                //If the user fails in entering a correct firstname and lastname the cancellation do not happen
                 return RedirectToAction("OrderCancelError", "Error", new { message = "Unfortunately your firstname or lastname did not match our records. Please try again." });
             }
         }

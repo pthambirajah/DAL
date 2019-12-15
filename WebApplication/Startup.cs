@@ -23,12 +23,6 @@ namespace WebApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
-            /*services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-            */
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
@@ -56,7 +50,6 @@ namespace WebApplication
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
-           // app.UseHttpContextItemsMiddleware();
             app.UseMvc();
             app.UseMvc(routes =>
             {
