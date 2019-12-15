@@ -57,7 +57,7 @@ namespace DAL
             return order;
         }
 
-        //????
+        //Method to get the very last idOrder from the table commande
         public int GetLastId()
         {
             int lastOrder = 0;

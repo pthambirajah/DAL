@@ -50,6 +50,14 @@
                     </ul>
                 </div>
             }
+            @if (ViewBag.userType == 2)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li> <a asp-area="" asp-controller="Credentials" asp-action="Index">Logout, @Html.Raw(ViewBag.username)?</a></li>
+                    </ul>
+                </div>
+            }
         </div>
     </nav>
 
