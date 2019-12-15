@@ -14,7 +14,7 @@
         <table id="cart" class="table table-hover table-condensed">
             <thead>
                 <tr>
-                    <th style="width:50%">@Html.DisplayNameFor(model => model.Dishe.name)</th>
+                    <th style="width:50%">Dishe</th>
 
                     <th style="width:8%"> @Html.DisplayNameFor(model => model.Quantity)</th>
 
@@ -24,36 +24,39 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td data-th="Product">
-                        <div class="row">
-                            <!--<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>-->
-                            <div class="col-sm-10">
-                                <h4 class="nomargin">@Html.DisplayFor(modelItem => item.Dishe.name)</h4>
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <!--<div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>-->
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">@Html.DisplayFor(modelItem => item.Dishe.name)</h4>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td data-th="Quantity">
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td class="actions" data-th="">
-                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                    </td>
-                   
-                    <td>
-                        @Html.ActionLink("Delete sans bootstrap", "DeleteItem", "Cart", new {idDish = item.Dishe.idDishes});
-                    </td>
-                </tr>
+                        </td>
+                        <td data-th="Quantity">
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td class="actions" data-th="">
+                        </td>
+
+                        <td>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>@Html.ActionLink("", "DeleteItem", "Cart", new { idDish = item.Dishe.idDishes })</button>
+                        </td>
+                    </tr>
                 }
+                <tr>
+                    <td></td>
+                    <td>Total amount</td>
+                    <td></td>
+                    <td><strong> @Html.Raw(ViewBag.totalAmount)</strong></td>
+                </tr>
             </tbody>
             <tfoot>
-                <tr class="visible-xs">
-                    <td class="text-center"><strong>@Html.Raw(ViewBag.totalAmount)</strong></td>
-                </tr>
+                
                 <tr>
                     <td><a href="@Url.Action("Dishes", "Cities", new { id = idRestaurant})" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continue Shopping</a></td>
                     <td colspan="2" class="hidden-xs"></td>
-                    <td class="hidden-xs text-center"><strong>@Html.Raw(ViewBag.totalAmount)</strong></td>
+                    
                     <td><a href="@Url.Action("SelectTime", "Cart")" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                 </tr>
             </tfoot>

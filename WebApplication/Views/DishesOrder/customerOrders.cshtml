@@ -50,9 +50,9 @@
                     </td>
                     <td>
                      
-                        <!--Compare delivery time and actual time + 3hours. If the delivery is later than our condition we can cancel the order-->
+                        <!--If order is already cancelled we do not display a cancel button.-->
                        @if (item.status != "cancelled") {
-                        @Html.ActionLink("Cancel", "Index","Cancel", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime })
+                        @Html.ActionLink("Cancel", "CheckBeforeCancel","DishesOrder", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime })
                        }
                     </td>
                 </tr>

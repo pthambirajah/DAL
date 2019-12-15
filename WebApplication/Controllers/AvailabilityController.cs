@@ -11,6 +11,7 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
+        //Allows the administrator to reset availability of every delivery employee.
         public IActionResult Reset()
         {
             AvailibilityManager aManager = new AvailibilityManager(Configuration);

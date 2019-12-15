@@ -17,6 +17,7 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
+        //Display the actual cart and total amount
         public IActionResult Index()
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
