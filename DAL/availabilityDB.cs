@@ -144,12 +144,9 @@ namespace DAL
             return nbcounter;
         }
 
-        //method to increment the counter
+        //method to increment the counter of a given availibility
         public void IncrementCounter(int id)
-        
-
         {
-
             int nbcountr = GetCounter(id)+1;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -175,5 +172,61 @@ namespace DAL
                 throw e;
             }
         }
+
+        //method to decrement the counter of a given availibility
+        public void DecrementCounter(int id)
+        {
+            int nbcountr = GetCounter(id) - 1;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE availibility SET countr = @nbcountr WHERE idAvailability=@id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@nbcountr", nbcountr);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+      
+        //
+        public void ResetAvailability(int id)
+        {
+            // int result = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE availibility SET isAvailable = 1  WHERE isAvailable = 0 AND idAvailability = @id ";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+
     }
 }

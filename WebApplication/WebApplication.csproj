@@ -25,13 +25,6 @@
   <ItemGroup>
     <Folder Include="Content\img\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\images\bestpizza.jpg" />
-    <None Include="wwwroot\images\kotturoti.jpg" />
-    <None Include="wwwroot\images\LSNlazone.jpeg" />
-    <None Include="wwwroot\images\MTXlazone.jpg" />
-  </ItemGroup>
   
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
