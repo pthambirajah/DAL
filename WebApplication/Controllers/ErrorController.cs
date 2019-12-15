@@ -8,7 +8,6 @@ namespace WebApplication.Controllers
         public IActionResult LoginError(string message)
         {
             ErrorViewModel notFound = new ErrorViewModel();
-            //notFound.message = "Unfortunately your username or password did not match our records. Please try again.";
             notFound.message = message;
             return View(notFound);
         }
@@ -20,9 +19,5 @@ namespace WebApplication.Controllers
             cannotCancel.message = message;
             return View(cannotCancel);
         }
-
-
-
-
     }
 }

@@ -44,10 +44,10 @@ namespace WebApplication.Controllers
             return View(dManager.GetDishes_orderByCustomer(id));
         }
 
-        public IActionResult cancel(int idOrder, TimeSpan deliveryTime)
+       /* public IActionResult cancel(int idOrder, TimeSpan deliveryTime)
         {
             TimeSpan limit = DateTime.Now.TimeOfDay;
-            TimeSpan variation = TimeSpan.FromHours(12);
+            TimeSpan variation = TimeSpan.FromHours(3);
             limit = limit.Add(variation);
             if (TimeSpan.Compare(deliveryTime, limit) > 0)
             {
@@ -59,6 +59,6 @@ namespace WebApplication.Controllers
                 return RedirectToAction("OrderCancelError", "Error", new { message = "Unfortunately you cannot cancel this order anymore. You should have cancelled 3 hours before the delivery time. Sorry :(" });
             }
             return RedirectToAction("customerOrders");
-        }
+        }*/
     }
 }

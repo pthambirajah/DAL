@@ -10,7 +10,7 @@ namespace DAL
         Customer AddCustomer(Customer customer);
 
         Customer GetCustomer (int id);
-        Customer GetFirstnameLastname(int id)
+        Customer GetFirstnameLastname(int id);
 
 
     }
