@@ -17,6 +17,7 @@ namespace WebApplication.Controllers
             Configuration = configuration;
         }
 
+        //Display cities in our Network
         public ActionResult Index()
         {
             ViewBag.username = HttpContext.Session.GetString("username");
@@ -25,6 +26,7 @@ namespace WebApplication.Controllers
             return View(cManager.GetCities());
         }
 
+        //Display restaurants of our network in the selected city
         public ActionResult Restaurants(int id)
         {
             ViewBag.username = HttpContext.Session.GetString("username");
@@ -33,6 +35,7 @@ namespace WebApplication.Controllers
             return View(rManager.GetRestaurantsOfCity(id));
         }
 
+        //Display dishes served by the selected restaurant
         public ActionResult Dishes(int id)
         {
             ViewBag.username = HttpContext.Session.GetString("username");
@@ -41,13 +44,15 @@ namespace WebApplication.Controllers
             return View(dManager.GetDishesOfRestaurant(id));
         }
 
+        //Allows customer to add a dish to his cart
         public ActionResult AddToCart(int id)
         {
-            
+            //We retrieve the dishe's price
             DishesManager dManager = new DishesManager(Configuration);
             Dishes dishe = new Dishes();
             int price = dManager.GetDishePrice(id);
 
+            //We add the price to the total amount, we initiate the session value if it is the first dish of the cart.
             if (HttpContext.Session.GetInt32("TotalAmount") != null) {
 
                 HttpContext.Session.SetInt32("TotalAmount", (price + (int)HttpContext.Session.GetInt32("TotalAmount")));
@@ -56,7 +61,7 @@ namespace WebApplication.Controllers
             {
                 HttpContext.Session.SetInt32("TotalAmount", price );
             }
-            
+            //So if it is the first dish to be added we create a list of item(Dishe+quantity) in the session
             if (SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
             {
                 List<Item> cart = new List<Item>();
@@ -64,7 +69,9 @@ namespace WebApplication.Controllers
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             else
-            {
+            {   /*Else if the list is already created we get it and check if the dish is already in the list.
+                    If yes we increment the quantity, else we add the dish as a new item.
+                 */
                 List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
                 int index = DoesExist(id);
                 if (index != -1)
@@ -80,6 +87,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        //Go through the list of item and try to match the id with an existing dish
         private int DoesExist(int id)
         {
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");

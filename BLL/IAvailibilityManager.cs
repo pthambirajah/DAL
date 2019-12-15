@@ -10,12 +10,13 @@ namespace BLL
     {
         List<Availability> GetAvailabilitiesByRestaurant(int id);
 
-        Availability AddAvailibility(Availability availibility);
-
-        void UpdateAvailability(int id);
+        void UpdateAvailability(int id, int status);
 
         void ResetAvailability();
         void IncrementCounter(int id);
         int GetCounter(int id);
+
+        void DecrementCounter(int id);
+        Availability IsAvailable(int idStaff, TimeSpan deliveryTime);
     }
 }

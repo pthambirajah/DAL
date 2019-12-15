@@ -54,7 +54,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, c.idCity, delivery.deliveryTime, d.quantity, o.idOrder, o.status FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE delivery.idStaff= @id AND delivery.deliveryDate=CAST(getdate() AS date)";
+                    string query = "SELECT m.name, c.lastname, c.firstname, c.address, cities.city, delivery.deliveryTime, d.quantity, o.idOrder, o.status FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer INNER JOIN Cities ON cities.idCity = c.idCity WHERE delivery.idStaff= @id AND delivery.deliveryDate=CAST(getdate() AS date)";
                     
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -74,7 +74,7 @@ namespace DAL
                             deliveryItem.lastname = (string)dr["lastname"];
                             deliveryItem.firstname = (string)dr["firstname"];
                             deliveryItem.address = (string)dr["address"];
-                            deliveryItem.idCity = (int)dr["idCity"];
+                            deliveryItem.City = (string)dr["city"];
                             deliveryItem.deliveryTime = (TimeSpan)dr["deliveryTime"];
                             if (dr["quantity"] != null)
                             {
@@ -107,7 +107,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT m.name, delivery.deliveryTime, d.quantity, o.idOrder, o.status FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE o.idCustomer = @id ORDER BY o.idOrder";
+                    string query = "SELECT m.name, delivery.deliveryTime, d.quantity, o.idOrder, o.status, delivery.idStaff FROM dishes_order d INNER JOIN commande o ON o.idOrder = d.idOrder INNER JOIN delivery ON delivery.idDelivery = o.idDelivery INNER JOIN dishes m ON m.idDishes=d.idDishes INNER JOIN customer c ON c.idCustomer = o.idCustomer  WHERE o.idCustomer = @id ORDER BY o.idOrder";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -128,6 +128,7 @@ namespace DAL
                             deliveryItem.Quantity = (int)dr["quantity"];
                             deliveryItem.idOrder = (int)dr["idOrder"];
                             deliveryItem.status = (string)dr["status"];
+                            deliveryItem.IdStaff = (int)dr["idStaff"];
 
                             deliveryBundle.Add(deliveryItem);
                         }

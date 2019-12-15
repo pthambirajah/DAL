@@ -12,7 +12,7 @@ namespace DAL
 
         int GetStatus(string username);
       
-        string GetPassword(int idCredentials, string username);
+        string GetPassword(string username);
         int GetIdStaff(string username);
 
     }

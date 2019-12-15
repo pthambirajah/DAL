@@ -5,20 +5,19 @@
     
 }
 
-<!------ Include the above in your HEAD tag ---------->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 <div class="container">
     @{
         int idRestaurant = Model.First().Dishe.idRestaurant;
     }
-    <table id="cart" class="table table-hover table-condensed">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
-                <th style="width:50%">Dishe</th>
+                <th>Dishe</th>
 
-                <th style="width:8%"> @Html.DisplayNameFor(model => model.Quantity)</th>
+                <th> @Html.DisplayNameFor(model => model.Quantity)</th>
 
-                <th style="width:10%"></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -37,26 +36,22 @@
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td>
-                        @Html.ActionLink("", "DeleteItem", "Cart", new { idDish = item.Dishe.idDishes })
-                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                        
+                        <a href="@Url.Action("DeleteItem", "Cart", new { idDish = item.Dishe.idDishes })"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o"></i></button></a>
                     </td>
                 </tr>
             }
             <tr>
                 <td></td>
                 <td>Total amount</td>
-                <td></td>
-                <td><strong> @Html.Raw(ViewBag.totalAmount)</strong></td>
+                <td><strong> @Html.Raw(ViewBag.totalAmount).- CHF</strong></td>
             </tr>
         </tbody>
         <tfoot>
 
             <tr>
                 <td><a href="@Url.Action("Dishes", "Cities", new { id = idRestaurant})" class="btn btn-warning"><i class="fa fa-angle-left"></i>Continue Shopping</a></td>
-                <td colspan="2" class="hidden-xs"></td>
-
-                <td><a href="@Url.Action("SelectTime", "Cart")" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                <td><a href="@Url.Action("SelectTime", "Cart")" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-center"></i></a></td>
+                <td colspan="6" class="hidden-xs"></td>
             </tr>
         </tfoot>
     </table>

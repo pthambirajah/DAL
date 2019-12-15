@@ -15,6 +15,11 @@ namespace BLL
             AvailibilityDb = new AvailabilityDB(configuration);
         }
 
+        public Availability IsAvailable(int idStaff, TimeSpan deliveryTime)
+        {
+            return AvailibilityDb.IsAvailable(idStaff, deliveryTime);
+        }
+
 
         public List<Availability> GetAvailabilitiesByRestaurant(int id)
         {
@@ -25,11 +30,15 @@ namespace BLL
         {
             AvailibilityDb.ResetAvailability();
         }
-        public void UpdateAvailability(int id)
+        public void UpdateAvailability(int id, int status)
         {
-            AvailibilityDb.UpdateAvailability(id);
+            AvailibilityDb.UpdateAvailability(id, status);
         }
 
+        public void DecrementCounter(int id)
+        {
+            AvailibilityDb.DecrementCounter(id);
+        }
 
         public void IncrementCounter(int id)
         {

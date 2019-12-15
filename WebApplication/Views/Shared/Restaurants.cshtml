@@ -4,26 +4,13 @@
     ViewData["Title"] = "Restaurants";
 }
 
-<h2>List of restaurants d'une ville</h2>
+<h2>List of restaurants of the city</h2>
 
-<!--
-<p>
-    <a asp-action="">Create New</a>
-</p>-->
 <table class="table">
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.idRestaurant)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.merchant_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.createdAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idCity)
+            Restaurant
         </th>
         <th></th>
     </tr>
@@ -32,19 +19,10 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idRestaurant)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.merchant_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.createdAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.idCity)
-            </td>
-            <td>
-                @Html.ActionLink("Dishes", "Dishes", new {  id=item.idRestaurant })
+                @Html.ActionLink("See Dishes", "Dishes", new {  id=item.idRestaurant })
             </td>
         </tr>
     }

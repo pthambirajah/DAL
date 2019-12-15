@@ -32,9 +32,9 @@ namespace BLL
             return CredentialsDb.GetIdCredentials(username);
         }
 
-        public string GetPassword(int idCredentials, string username)
+        public string GetPassword(string username)
         {
-            return CredentialsDb.GetPassword(idCredentials, username);
+            return CredentialsDb.GetPassword(username);
         }
 
         public int GetStatus(string username)

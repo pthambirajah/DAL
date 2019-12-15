@@ -4,26 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Dishes of the restaurant</h2>
 
-<!--<p>
-    <a asp-action="">Create New</a>
-</p>-->
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idDishes)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.price)
-            </th>
-        
-            <th>
-                @Html.DisplayNameFor(model => model.idRestaurant)
             </th>
             <th></th>
         </tr>
@@ -33,24 +23,14 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idDishes)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.price)
             </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.idRestaurant)
-            </td>
-            
+                        
             <td>
                 @Html.ActionLink("AddToCart", "AddToCart", new { id = item.idDishes })
-                <!--Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
             </td>
         </tr>
         }

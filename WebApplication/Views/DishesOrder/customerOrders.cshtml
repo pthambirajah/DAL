@@ -6,7 +6,7 @@
 
 <h2>My orders</h2>
 
-<table class="table">
+<table class="table table-striped" >
     @if (Model != null)
     {
         <thead>
@@ -52,7 +52,7 @@
                      
                         <!--If order is already cancelled we do not display a cancel button.-->
                        @if (item.status != "cancelled") {
-                        @Html.ActionLink("Cancel", "CheckBeforeCancel","DishesOrder", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime })
+                        @Html.ActionLink("Cancel", "CheckBeforeCancel","DishesOrder", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime, idStaff = item.IdStaff })
                        }
                     </td>
                 </tr>

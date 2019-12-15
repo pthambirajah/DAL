@@ -14,10 +14,10 @@
                 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.city)
+                City
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.post_code)
+                PostCode
             </th>
             <th></th>
         </tr>
@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.post_code)
             </td>
             <td>
-        @Html.ActionLink("Restaurants", "Restaurants", new { id=item.idCity }) |
+        @Html.ActionLink("See Restaurants", "Restaurants", new { id=item.idCity })
     </td>
         </tr>
 }

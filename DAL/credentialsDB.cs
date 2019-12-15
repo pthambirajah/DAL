@@ -88,7 +88,7 @@ namespace DAL
         //GET ID CREDENTIALS EN FONCTION D'UN USERNAME
         public int GetIdCredentials(string username)
         {
-            int idCustomer = 0;
+            int idCredentials = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
@@ -106,7 +106,7 @@ namespace DAL
                         if (dr.Read())
                         {
 
-                            idCustomer = (int)dr["idCredentials"];
+                            idCredentials = (int)dr["idCredentials"];
                         }
                     }
                 }
@@ -116,11 +116,11 @@ namespace DAL
             {
                 throw e;
             }
-            return idCustomer;
+            return idCredentials;
         }
 
         //method to get a a password with its given parameters
-        public string GetPassword(int idCredentials, string username)
+        public string GetPassword(string username)
         {
             string password = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -129,10 +129,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select password from credentials WHERE idCredentials=@idCredentials AND username=@username";
+                    string query = "Select password from credentials WHERE username=@username";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("username", username);
-                    cmd.Parameters.AddWithValue("idCredentials", idCredentials);
+                    
 
                     cn.Open();
 
