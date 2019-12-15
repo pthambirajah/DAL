@@ -15,7 +15,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-
+        //method to add a dish
         public void AddDishes_order(int idDishe, int idLastOrder, int quantity)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -42,6 +42,8 @@ namespace DAL
 
         }
 
+
+        //Method to get a list of a DishOrder by its idStaff given in parameter
         public List<deliveryItem> GetDishes_orderByStaff(int id)
         {
             List<deliveryItem> deliveryBundle = null;
@@ -94,6 +96,7 @@ namespace DAL
             return deliveryBundle;
         }
 
+        //Method to get a list of a DishOrder by its idCustomer given in parameter
         public List<deliveryItem> GetDishes_orderByCustomer(int id)
         {
             List<deliveryItem> deliveryBundle = null;
@@ -139,6 +142,8 @@ namespace DAL
             return deliveryBundle;
         }
 
+        //Method to Update an orderstatus to "archived". with its idStaff given in parameter
+
         public void UpdateOrderStatus(int id)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -162,6 +167,8 @@ namespace DAL
             }
 
         }
+
+        //Method to Update an orderstatus to "cancelled". with its idStaff given in parameter
         public void UpdateOrderStatusToCancel(int id)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

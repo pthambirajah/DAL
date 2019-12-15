@@ -56,6 +56,8 @@ namespace DAL
             return availability;
         }
 
+
+        //Update the availiility of a given idAvailability 
         public void UpdateAvailability(int id)
         {
            // int result = 0;
@@ -81,6 +83,11 @@ namespace DAL
                 throw e;
             }
         }
+
+        /*Reset all availibilities and counters
+         * Reset the counter to 0 if it is not equals to zero
+         * Reset the isAvailable to 1 if it is equal to zero
+         */
 
         public void ResetAvailability()
         {

@@ -15,6 +15,8 @@ namespace DAL
             Configuration = configuration;
         }
 
+
+        //Method to get an Object Order
         public Order GetOrder(int id)
         {
             Order order = null;
@@ -55,6 +57,7 @@ namespace DAL
             return order;
         }
 
+        //????
         public int GetLastId()
         {
             int lastOrder = 0;
@@ -86,6 +89,8 @@ namespace DAL
             return lastOrder;
         }
 
+
+        //Method to add an Order with a given idCustomer and a given IdDelivery
         public void AddOrder(int idCustomer, int idDelivery)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -113,6 +118,7 @@ namespace DAL
            
         }
 
+        //Method to add an Order with a given idCustomer and a given IdDelivery
         public int UpdateOrder(Order order)
         {
             int result = 0;
@@ -141,6 +147,8 @@ namespace DAL
 
             return result;
         }
+
+        //Method to delete an Order with a given idOrder
 
         public int DeleteOrder(int id)
         {

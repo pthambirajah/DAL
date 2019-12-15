@@ -14,6 +14,8 @@ namespace DAL
         {
             Configuration = configuration;
         }
+
+        //Method to get a list of all restaurants with its id given in parameter
         public List<Dishes> GetDishesOfRestaurant(int id)
         {
             List<Dishes> results = null;
@@ -55,6 +57,8 @@ namespace DAL
 
             return results;
         }
+
+        //Method to get a list of all dishes
         public List<Dishes> GetDishes()
         {
             List<Dishes> results = null;
@@ -95,6 +99,8 @@ namespace DAL
 
             return results;
         }
+
+        //Method to get an Object Dish
         public Dishes GetDishe(int id)
         {
             Dishes dishes = null;
@@ -134,6 +140,7 @@ namespace DAL
             return dishes;
         }
 
+        //Method to get a price with an idDish given in parameter
         public int GetDishePrice(int id)
         {
             int dishePrice = 0;

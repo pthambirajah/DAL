@@ -16,6 +16,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //get a Customer with its given id parameter
 
         public Customer GetCustomer(int id)
         {
@@ -59,6 +60,7 @@ namespace DAL
             return customer;
         }
 
+        //get a Customer ID with the given idCredential defined in parameter
         public int GetCustomerIDByCredentials(int id)
         {
             int iDCustomer = 0;
@@ -91,6 +93,8 @@ namespace DAL
             return iDCustomer;
         }
 
+
+        //method to add a customer
         public Customer AddCustomer(Customer customer)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -123,6 +127,8 @@ namespace DAL
             return customer;
         }
 
+
+        //Method to get the firstname and the lastName of a Customer given its id.
         public Customer GetFirstnameLastname(int id)
         {
             Customer customer = null;
