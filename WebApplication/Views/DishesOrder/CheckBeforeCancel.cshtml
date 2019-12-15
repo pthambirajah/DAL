@@ -1,0 +1,46 @@
+﻿@model DTO.Customer
+
+@{
+    ViewData["Title"] = "CheckBeforeCancel";
+}
+
+<h2>Cancel your order</h2>
+
+<h2>Please enter your name and firstname to cancel your order.</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+        @using (Html.BeginForm("CancelOrder", "DishesOrder", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <label class="col-sm-3">Firstname</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "firstname" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3">Lastname</label>
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "lastname" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Cancel my order</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

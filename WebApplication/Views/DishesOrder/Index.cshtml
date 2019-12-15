@@ -7,8 +7,6 @@
 <h2>Order to deliver</h2>
 
 <table class="table">
-    @if (Model != null)
-    {
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(model => model.dishesname)</th>
@@ -56,8 +54,6 @@
 
 
                     <td>
-                        @Html.ActionLink("Cancelled", "Cancelled", new { /* id=item.PrimaryKey */ }) |
-
                         <!--Might not work, by alex lol-->
                         @Html.ActionLink("Archive", "UpdateOrderStatus", new { idOrder = item.idOrder })
                         <!--Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })-->
@@ -65,9 +61,5 @@
                 </tr>
             }
         </tbody>
-    }
-    else
-    {
-        <h4>You don't have any orders, enjoy while it lasts! :-)</h4>
     }
 </table>

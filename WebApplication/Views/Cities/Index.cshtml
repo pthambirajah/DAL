@@ -11,7 +11,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.idCity)
+                
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.city)
@@ -22,12 +22,14 @@
             <th></th>
         </tr>
     </thead>
+
     <tbody>
         
 @foreach (var item in Model) {
+    var image = "~/images/" + item.img + ".jpg";
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.idCity)
+                <img src=@Url.Content(image) class="img-rounded" alt="Montreux">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.city)

@@ -43,6 +43,9 @@ namespace DAL
                             city.idCity = (int)dr["idCity"];
                             city.city = (string)dr["city"];
                             city.post_code = (string)dr["post_code"];
+                            if (dr["img"] != null) { 
+                                city.img = (string)dr["img"];
+                            }
 
                             results.Add(city);
                         }

@@ -9,5 +9,7 @@ namespace DTO
         public int idCity { get; set; }
         public string city { get; set; }
         public string post_code { get; set; }
+
+        public string img { get; set; }
     }
 }

@@ -15,7 +15,6 @@ namespace WebApplication.Controllers
         public IActionResult OrderCancelError(string message)
         {
             ErrorViewModel cannotCancel = new ErrorViewModel();
-
             cannotCancel.message = message;
             return View(cannotCancel);
         }

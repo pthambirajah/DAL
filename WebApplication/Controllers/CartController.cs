@@ -17,17 +17,21 @@ namespace WebApplication.Controllers
         {
             Configuration = configuration;
         }
+        //Display the actual cart and total amount
         public IActionResult Index()
         {
             ViewBag.totalAmount = HttpContext.Session.GetInt32("TotalAmount");
             ViewBag.username = HttpContext.Session.GetString("username");
           
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            
+            if (cart != null)
+            {
                 return View(cart);
+            }
+            return RedirectToAction("CartError", "Error", new { message = "You have nothing in the cart. Feel free to add something !" });
         }
         
-
+        //Allows a customer to delete a dishe from the cart. If there is multiple times the same dish, quantity will be decremented.
         public IActionResult DeleteItem(int idDish)
         {
             DishesManager dManager = new DishesManager(Configuration);
@@ -36,6 +40,7 @@ namespace WebApplication.Controllers
            
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
             var itemToRemove = cart.Single(d => d.Dishe.idDishes == idDish);
+            //In case of the element the customer wants to delete is the last one, we empty the session.
             if (cart.Count == 1)
             {
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", null);
