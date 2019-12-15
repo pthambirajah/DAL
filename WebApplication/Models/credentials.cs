@@ -11,7 +11,8 @@ namespace WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class credentials
     {
         public credentials()
@@ -20,7 +21,9 @@ namespace WebApplication.Models
         }
     
         public int idCredentials { get; set; }
+        [Required]
         public string username { get; set; }
+        [Required]
         public string password { get; set; }
     
         public virtual ICollection<customer> customer { get; set; }
