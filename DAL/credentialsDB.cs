@@ -15,6 +15,8 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //Method to get a credential by its given parameter
+
         public Credentials GetCredentials(int id)
         {
             Credentials credentials = null;
@@ -51,6 +53,8 @@ namespace DAL
 
             return credentials;
         }
+
+        //Method to add a credential
 
         public Credentials AddCredentials(Credentials credentials)
         {
@@ -115,7 +119,7 @@ namespace DAL
             return idCustomer;
         }
 
-       
+        //method to get a a password with its given parameters
         public string GetPassword(int idCredentials, string username)
         {
             string password = null;
@@ -185,6 +189,7 @@ namespace DAL
             return idStaff;
         }
 
+        //get status from a credentials with its given parameter
         public int GetStatus(string username)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

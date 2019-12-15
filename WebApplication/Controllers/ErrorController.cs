@@ -19,5 +19,21 @@ namespace WebApplication.Controllers
             cannotCancel.message = message;
             return View(cannotCancel);
         }
+
+        public IActionResult CartError(string message)
+        {
+            ErrorViewModel cartempty = new ErrorViewModel();
+
+            cartempty.message = message;
+            return View(cartempty);
+        }
+
+        public IActionResult NoOrderError(string message)
+        {
+            ErrorViewModel listempty = new ErrorViewModel();
+
+            listempty.message = message;
+            return View(listempty);
+        }
     }
 }

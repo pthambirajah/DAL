@@ -15,6 +15,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //method to get a staffid by its given IdCredential
         public int GetStaffId(int id)
         {
             int idStaff = 0;
@@ -50,7 +51,7 @@ namespace DAL
             return idStaff;
         }
 
-
+        //method to get a staff by its given id
         public Staff GetStaff(int id)
         {
             Staff staff = null;
@@ -86,6 +87,7 @@ namespace DAL
             return staff;
         }
 
+        //method to add a staff by its given id
         public Staff AddStaff(Staff staff)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -111,6 +113,7 @@ namespace DAL
             return staff;
         }
 
+        //method to update a Staff
         public int UpdateStaff(Staff staff)
         {
             int result = 0;
@@ -138,6 +141,7 @@ namespace DAL
             return result;
         }
 
+        //method to delete a staff by its given id
         public int DeleteStaff(int id)
         {
             int result = 0;

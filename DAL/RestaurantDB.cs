@@ -15,8 +15,8 @@ namespace DAL
             Configuration = configuration;
         }
 
-        
-            public List<Restaurant> GetRestaurantsOfCity(int id)
+        //Method to get a list of a Restaurants in a given idCity
+        public List<Restaurant> GetRestaurantsOfCity(int id)
             {
             List<Restaurant> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -58,6 +58,7 @@ namespace DAL
             return results;
         }
 
+        //Method to get a list of a Restaurants
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
@@ -99,6 +100,7 @@ namespace DAL
             return results;
         }
 
+        //Method to get a Restaurants with its given id
         public Restaurant GetRestaurant(int id)
         {
             Restaurant restaurant = null;
@@ -137,6 +139,7 @@ namespace DAL
             return restaurant;
         }
 
+        //Method to Add a restaurant
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -164,6 +167,7 @@ namespace DAL
             return restaurant;
         }
 
+        //method to update a restaurant
         public int UpdateRestaurant(Restaurant restaurant)
         {
             int result = 0;
@@ -192,6 +196,7 @@ namespace DAL
             return result;
         }
 
+        //method to delete a restaurant by its given id
         public int DeleteRestaurant(int id)
         {
             int result = 0;

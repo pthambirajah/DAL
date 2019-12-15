@@ -15,6 +15,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+        //Method to get all cities
 
         public List<Cities> GetCities()
         {
@@ -55,6 +56,8 @@ namespace DAL
 
             return results;
         }
+
+        //Method to get a city by its given parameter
         public Cities GetCity(int id)
         {
             Cities cities = null;

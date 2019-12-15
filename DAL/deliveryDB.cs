@@ -17,6 +17,7 @@ namespace DAL
             }
   
 
+        //??
         public int GetLastId()
         {
             int lastDelivery = 0;
@@ -48,6 +49,8 @@ namespace DAL
             return lastDelivery;
         }
 
+
+        //method to add a delivery
         public void AddDelivery(TimeSpan choosenTime, int idStaff)
             {
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
