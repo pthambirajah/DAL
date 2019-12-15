@@ -16,5 +16,17 @@ namespace WebApplication.Controllers
             notFound.message = message;
             return View(notFound);
         }
+
+        public IActionResult orderCancelError(string message)
+        {
+            ErrorViewModel cannotCancel = new ErrorViewModel();
+
+            cannotCancel.message = message;
+            return View(cannotCancel);
+        }
+
+
+
+
     }
 }

@@ -1,0 +1,12 @@
+﻿@model WebApplication.Models.ErrorViewModel
+
+@{
+    ViewData["Title"] = "orderCancelError";
+}
+
+<h2>Oops...</h2>
+<h2>orderCancelError</h2>
+
+<h3> @Html.DisplayFor(model => model.message)</h3>
+<a href="@Url.Action("customerOrders", "DishesOrder")"> <button type="button" class="btn btn-info">Back to my orders</button></a>
+
