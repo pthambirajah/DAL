@@ -24,8 +24,11 @@ namespace WebApplication.Controllers
             ViewBag.username = HttpContext.Session.GetString("username");
           
             List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            
+            if (cart != null)
+            {
                 return View(cart);
+            }
+            return RedirectToAction("CartError", "Error", new { message = "You have nothing in the cart. Feel free to add something !" });
         }
         
 

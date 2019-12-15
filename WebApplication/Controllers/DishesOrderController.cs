@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BLL;
 using DTO;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +23,12 @@ namespace WebApplication.Controllers
             ViewBag.username = HttpContext.Session.GetString("username");
             ViewBag.userType = HttpContext.Session.GetInt32("userType");
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
-            return View(dManager.GetDishes_orderByStaff(id));
+            List<deliveryItem> OrderToDeliver = dManager.GetDishes_orderByStaff(id);
+            if (OrderToDeliver != null)
+            {
+                return View(OrderToDeliver);
+            }
+            return RedirectToAction("NoOrderError", "Error", new { message ="You don't have any orders, enjoy while it lasts! :-)" });
         }
         
         public IActionResult UpdateOrderStatus (int idOrder)
