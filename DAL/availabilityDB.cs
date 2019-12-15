@@ -58,7 +58,7 @@ namespace DAL
 
 
         //Update the availiility of a given idAvailability 
-        public void UpdateAvailability(int id)
+        public void UpdateAvailability(int id, int status)
         {
            // int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -69,10 +69,11 @@ namespace DAL
                 {
                     
 
-                    string query = "UPDATE availibility SET isAvailable = 0 WHERE idAvailability=@idAvailability";
+                    string query = "UPDATE availibility SET isAvailable = @status WHERE idAvailability=@idAvailability";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idAvailability", id);
-             
+                    cmd.Parameters.AddWithValue("@status", status);
+
                     cn.Open();
 
                     cmd.ExecuteNonQuery();
@@ -144,7 +145,7 @@ namespace DAL
             return nbcounter;
         }
 
-        //method to increment the counter of a given availibility
+        //method to increment the counter
         public void IncrementCounter(int id)
         {
             int nbcountr = GetCounter(id)+1;
@@ -155,8 +156,6 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "UPDATE availibility SET countr = @nbcountr WHERE idAvailability=@id";
-
-
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@nbcountr", nbcountr);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -173,10 +172,10 @@ namespace DAL
             }
         }
 
-        //method to decrement the counter of a given availibility
+        //method to decrement the counter
         public void DecrementCounter(int id)
         {
-            int nbcountr = GetCounter(id) - 1;
+            int nbcountr = GetCounter(id) -1;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
@@ -184,8 +183,6 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "UPDATE availibility SET countr = @nbcountr WHERE idAvailability=@id";
-
-
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@nbcountr", nbcountr);
                     cmd.Parameters.AddWithValue("@id", id);
@@ -201,32 +198,48 @@ namespace DAL
                 throw e;
             }
         }
-
-      
-        //
-        public void ResetAvailability(int id)
+        //method to retrieve availability
+        public Availability IsAvailable(int idStaff, TimeSpan deliveryTime)
         {
-            // int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            Availability availability = null;
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE availibility SET isAvailable = 1  WHERE isAvailable = 0 AND idAvailability = @id ";
+                    string query = "SELECT isAvailable, idAvailability FROM availibility WHERE idStaff = @idStaff AND time = @deliveryTime";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idStaff", idStaff);
+                    cmd.Parameters.AddWithValue("@deliveryTime", deliveryTime);
 
                     cn.Open();
-                    cmd.ExecuteNonQuery();
+
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            availability = new Availability();
+                            availability.idAvailability = (int)dr["idAvailability"];
+                            if ((int)dr["isAvailable"] == 1)
+                            {
+                                availability.isAvailable = true;
+                            }
+                            else
+                            {
+                                availability.isAvailable = false;
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
+            return availability;
         }
-
-
-
 
     }
 }

@@ -11,7 +11,7 @@ namespace BLL
         Credentials AddCredentials(Credentials credentials);
        
         Credentials GetIdCredentials(string username);
-        Credentials GetPassword(int idCredentials, string username);
+        Credentials GetPassword(string username);
 
         int GetStatus(string username);
  

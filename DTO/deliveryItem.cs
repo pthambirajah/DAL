@@ -15,7 +15,7 @@ namespace DTO
 
         public string address { get; set; }
 
-        public int idCity { get; set; }
+        public string City { get; set; }
 
         public TimeSpan deliveryTime { get; set; }
 
@@ -24,6 +24,8 @@ namespace DTO
         public int idOrder { get; set; }
 
         public string status { get; set; }
+
+        public int IdStaff { get; set; }
 
     }
 }

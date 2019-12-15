@@ -5,6 +5,7 @@ using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
@@ -38,7 +39,7 @@ namespace WebApplication.Controllers
             Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
             dManager.UpdateOrderStatus(idOrder);
 
-            return View(dManager.GetDishes_orderByStaff(id));
+            return RedirectToAction("Index");
         }
 
         public IActionResult customerOrders()
@@ -50,7 +51,7 @@ namespace WebApplication.Controllers
             return View(dManager.GetDishes_orderByCustomer(id));
         }
 
-        public IActionResult CheckBeforeCancel(int idOrder, TimeSpan deliveryTime)
+        public IActionResult CheckBeforeCancel(int idOrder, TimeSpan deliveryTime, int idStaff)
         {
             HttpContext.Session.SetInt32("idOrder", idOrder);
             TimeSpan limit = DateTime.Now.TimeOfDay;
@@ -58,6 +59,8 @@ namespace WebApplication.Controllers
             limit = limit.Add(variation);
             if (TimeSpan.Compare(deliveryTime, limit) > 0)
             {
+                HttpContext.Session.SetInt32("idStaffToDecrement", idStaff);
+                SessionHelper.SetObjectAsJson(HttpContext.Session,"deliveryTimeToCancel", deliveryTime);
                 return View();
             }
             else
@@ -70,6 +73,7 @@ namespace WebApplication.Controllers
         {
             var customerDbManager = new CustomerManager(Configuration);
             int idCustomer = (int)HttpContext.Session.GetInt32("idCustomer");
+            
             Customer customer = customerDbManager.GetFirstnameLastname(idCustomer);
             //We make our strings lower case so we don't care whether the customer use capital case or not.
             string firstnameC = customerModel.FirstName.ToLower();
@@ -78,8 +82,19 @@ namespace WebApplication.Controllers
             if (firstnameC.Equals(customer.FirstName.ToLower()) && lastnameC.Equals(customer.LastName.ToLower()))
             {
                 int idOrder = (int)HttpContext.Session.GetInt32("idOrder");
+                int idStaffToDecrement = (int)HttpContext.Session.GetInt32("idStaffToDecrement");
+                TimeSpan deliveryTimeToCancel = SessionHelper.GetObjectFromJson<TimeSpan>(HttpContext.Session, "deliveryTimeToCancel");
+
                 Dishes_orderManager dManager = new Dishes_orderManager(Configuration);
                 dManager.UpdateOrderStatusToCancel(idOrder);
+
+                AvailibilityManager aManager = new AvailibilityManager(Configuration);
+                aManager.DecrementCounter(idStaffToDecrement);
+
+                Availability availabilityStatus = aManager.IsAvailable(idStaffToDecrement, deliveryTimeToCancel);
+                if (!availabilityStatus.isAvailable){
+                    aManager.UpdateAvailability(availabilityStatus.idAvailability, 1);
+                }
                 return RedirectToAction("customerOrders", "DishesOrder");
             }
             else

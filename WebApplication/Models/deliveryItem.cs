@@ -17,7 +17,7 @@ namespace WebApplication.Models
 
         public string address { get; set; }
 
-        public int idCity { get; set; }
+        public string City { get; set; }
 
         public TimeSpan deliveryTime { get; set; }
 

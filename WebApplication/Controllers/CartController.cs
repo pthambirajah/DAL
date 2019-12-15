@@ -45,13 +45,13 @@ namespace WebApplication.Controllers
             {
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", null);
             }
+            //If the item has more than 1 quantity, we just decrement it but do not delete the entire
             else if (itemToRemove.Quantity>1)
             {
                 cart.Remove(itemToRemove);
                 itemToRemove.Quantity--;
                 cart.Add(itemToRemove);
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-
             }
             else
             {
@@ -60,6 +60,7 @@ namespace WebApplication.Controllers
             }
             return RedirectToAction("Index", "Cart");
         }
+
 
         public IActionResult SelectTime()
         {
@@ -89,14 +90,14 @@ namespace WebApplication.Controllers
             int idCustomer = cManger.GetCustomerIDByCredentials(idCredentials);
             AvailibilityManager aManager = new AvailibilityManager(Configuration);
 
-            if (idAvailability % 15 < 14)
+            if (idAvailability % 15 < 14 && idAvailability % 15 >= 1)
             {
                 //additioning the counter of the cur. time + cur. time + 15 + cur. time + 30
                 int totalCounter = aManager.GetCounter(idAvailability) + aManager.GetCounter(idAvailability + 1) + aManager.GetCounter(idAvailability + 2);
 
-                if (totalCounter >= 5)
-                    //Make deliveryBoy unavailable at the choosen time
-                    aManager.UpdateAvailability(idAvailability);
+                if (totalCounter >=4)
+                    //Make deliveryBoy unavailable at the choosen time, 0 means unavailable
+                    aManager.UpdateAvailability(idAvailability, 0);
 
                 for (int i = idAvailability; i <= idAvailability + 2; i++)
                     //increment counter
@@ -107,9 +108,9 @@ namespace WebApplication.Controllers
             {
                 int totalCounter = aManager.GetCounter(idAvailability) + aManager.GetCounter(idAvailability + 1);
 
-                if (totalCounter >= 5)
+                if (totalCounter >= 4)
                     //Make deliveryBoy unavailable at the choosen time
-                    aManager.UpdateAvailability(idAvailability);
+                    aManager.UpdateAvailability(idAvailability, 0);
 
                 for (int i = idAvailability; i <= idAvailability + 1; i++)
                     //increment counter
@@ -119,9 +120,9 @@ namespace WebApplication.Controllers
             { 
                 int totalCounter = aManager.GetCounter(idAvailability);
 
-                if (totalCounter >= 5)
+                if (totalCounter >= 4)
                     //Make deliveryBoy unavailable at the choosen time
-                    aManager.UpdateAvailability(idAvailability);
+                    aManager.UpdateAvailability(idAvailability, 0);
                 
                 aManager.IncrementCounter(idAvailability);
             }
