@@ -47,7 +47,6 @@ namespace DAL
         public List<deliveryItem> GetDishes_orderByStaff(int id)
         {
             List<deliveryItem> deliveryBundle = null;
-            var name = "";
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try

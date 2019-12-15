@@ -17,7 +17,7 @@ namespace DAL
             }
   
 
-        //??
+        //Method to get the very last idDelivery from the table delivery
         public int GetLastId()
         {
             int lastDelivery = 0;
