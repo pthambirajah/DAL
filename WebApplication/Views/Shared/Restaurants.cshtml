@@ -4,27 +4,30 @@
     ViewData["Title"] = "Restaurants";
 }
 
+<!--Shared view displaying all the restaurants of a given city-->
+
 <h2>List of restaurants of the city</h2>
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            Restaurant
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                Restaurant
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.merchant_name)
-            </td>
-            <td>
-                @Html.ActionLink("See Dishes", "Dishes", new {  id=item.idRestaurant })
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.merchant_name)
+                </td>
+                <td>
+                    @Html.ActionLink("See Dishes", "Dishes", new { id = item.idRestaurant })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

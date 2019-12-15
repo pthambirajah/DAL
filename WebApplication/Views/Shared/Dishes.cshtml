@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+<!--Shared view displaying all the dishes of a given restaurant-->
 
 <h2>Dishes of the restaurant</h2>
 
@@ -21,18 +22,18 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-                        
-            <td>
-                @Html.ActionLink("AddToCart", "AddToCart", new { id = item.idDishes })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+
+                <td>
+                    @Html.ActionLink("AddToCart", "AddToCart", new { id = item.idDishes })
+                </td>
+            </tr>
         }
     </tbody>
 </table>

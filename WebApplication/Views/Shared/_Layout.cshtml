@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<!--Shared view displaying the navbar + footer-->
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -36,7 +38,7 @@
                     <ul class="nav navbar-nav">
                         <li><a asp-area="" asp-controller="Cities" asp-action="Index">Order Something</a></li>
                         <li><a asp-area="" asp-controller="Cart" asp-action="Index">Cart</a></li>
-                        <li><a asp-area="" asp-controller="DishesOrder" asp-action="customerOrders">My Orders</a></li>
+                        <li><a asp-area="" asp-controller="DishesOrder" asp-action="CustomerOrders">My Orders</a></li>
                         <li> <a asp-area="" asp-controller="Credentials" asp-action="Index">Logout, @Html.Raw(ViewBag.username)?</a></li>
                     </ul>
                 </div>
