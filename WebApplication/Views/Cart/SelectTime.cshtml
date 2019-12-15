@@ -1,4 +1,6 @@
-﻿@model IEnumerable<DTO.Availability>
+﻿<!--View displaying the delivery time available -->
+
+@model IEnumerable<DTO.Availability>
 
 @{
     ViewData["Title"] = "SelectTime";
@@ -16,15 +18,16 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.time)
-            </td>
-            <td>
-                @Html.ActionLink("Choose This time", "ProceedCheckout","Cart", new { idAvailability=item.idAvailability, idStaff=item.idStaff, choosenTime = item.time })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.time)
+                </td>
+                <td>
+                    @Html.ActionLink("Choose This time", "ProceedCheckout", "Cart", new { idAvailability = item.idAvailability, idStaff = item.idStaff, choosenTime = item.time })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

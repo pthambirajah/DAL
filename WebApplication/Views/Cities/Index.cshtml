@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-  
+<!--View displaying the covered cities -->
+
 <h2>Covered cities</h2>
 
 
@@ -11,7 +12,7 @@
     <thead>
         <tr>
             <th>
-                
+
             </th>
             <th>
                 City
@@ -24,23 +25,24 @@
     </thead>
 
     <tbody>
-        
-@foreach (var item in Model) {
-    var image = "~/images/" + item.img + ".jpg";
-        <tr>
-            <td>
-                <img src=@Url.Content(image) class="img-rounded" alt="Montreux">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.post_code)
-            </td>
-            <td>
-        @Html.ActionLink("See Restaurants", "Restaurants", new { id=item.idCity })
-    </td>
-        </tr>
-}
+
+        @foreach (var item in Model)
+        {
+            var image = "~/images/" + item.img + ".jpg";
+            <tr>
+                <td>
+                    <img src=@Url.Content(image) class="img-rounded" alt="Montreux">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.post_code)
+                </td>
+                <td>
+                    @Html.ActionLink("See Restaurants", "Restaurants", new { id = item.idCity })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

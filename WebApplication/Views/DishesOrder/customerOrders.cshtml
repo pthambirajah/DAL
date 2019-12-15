@@ -3,10 +3,12 @@
 @{
     ViewData["Title"] = "customerOrders";
 }
+<!--View displaying the order of a given customer-->
+
 
 <h2>My orders</h2>
 
-<table class="table table-striped" >
+<table class="table table-striped">
     @if (Model != null)
     {
         <thead>
@@ -49,11 +51,12 @@
                         @Html.DisplayFor(modelItem => item.status)
                     </td>
                     <td>
-                     
+
                         <!--If order is already cancelled we do not display a cancel button.-->
-                       @if (item.status != "cancelled") {
-                        @Html.ActionLink("Cancel", "CheckBeforeCancel","DishesOrder", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime, idStaff = item.IdStaff })
-                       }
+                        @if (item.status != "cancelled")
+                        {
+                            @Html.ActionLink("Cancel", "CheckBeforeCancel", "DishesOrder", new { idOrder = item.idOrder, deliveryTime = item.deliveryTime, idStaff = item.IdStaff })
+                        }
                     </td>
                 </tr>
             }
